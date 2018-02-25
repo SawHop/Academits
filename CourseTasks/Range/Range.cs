@@ -56,23 +56,20 @@ namespace Range
 
         public Range[] GetConcatenationOfIntervals(Range r2)
         {
-            int x;
-
-            if ((r2.From >= To) || (From >= r2.To))
+            if ((r2.From > To) || (From > r2.To))
             {
-                x = 2;
-                Range[] arrayOfRanges = new Range[x];
+                Range[] arrayOfRanges = new Range[2];
 
                 arrayOfRanges[0] = new Range(From, To);
-                Range r3 = r2;
+
+                Range r3 = (Range)r2.MemberwiseClone();
                 arrayOfRanges[1] = r3;
 
                 return arrayOfRanges;
             }
             else
             {
-                x = 1;
-                Range[] arrayOfRanges = new Range[x];
+                Range[] arrayOfRanges = new Range[1];
 
                 if (From >= r2.From && To >= r2.To)
                 {
@@ -86,6 +83,14 @@ namespace Range
                 else if (From <= r2.From && To >= r2.To)
                 {
                     arrayOfRanges[0] = new Range(r2.From, r2.To);
+                }
+                else if ((r2.From >= To) || (From >= r2.To))
+                {
+                    arrayOfRanges[0] = new Range(r2.From, To);
+                }
+                else if (From >= r2.To)
+                {
+                    arrayOfRanges[0] = new Range(From, r2.To);
                 }
                 else
                 {

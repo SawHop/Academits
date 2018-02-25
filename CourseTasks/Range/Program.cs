@@ -10,12 +10,12 @@ namespace Range
     {
         static void Main(string[] args)
         {
-            Range r1 = new Range(23, 32);
+            Range r1 = new Range(30, 40);
 
             double numberInRange = 8;
             r1.IsInside(numberInRange);
 
-            Range r2 = new Range(28, 35);
+            Range r2 = new Range(30, 36);
 
             if (r1.GetGeneral(r2) != null)
             {
