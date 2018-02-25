@@ -62,7 +62,7 @@ namespace Range
 
                 arrayOfRanges[0] = new Range(From, To);
 
-                Range r3 = (Range)r2.MemberwiseClone();
+                Range r3 = new Range(r2.From, r2.To);
                 arrayOfRanges[1] = r3;
 
                 return arrayOfRanges;
@@ -73,30 +73,74 @@ namespace Range
 
                 if (From >= r2.From && To >= r2.To)
                 {
-                    arrayOfRanges[0] = new Range(From, r2.To);
+                    arrayOfRanges[0] = new Range(r2.From, To);
 
                 }
                 else if (To <= r2.To && r2.From >= From)
                 {
-                    arrayOfRanges[0] = new Range(r2.From, To);
+                    arrayOfRanges[0] = new Range(From, r2.To);
                 }
                 else if (From <= r2.From && To >= r2.To)
                 {
-                    arrayOfRanges[0] = new Range(r2.From, r2.To);
+                    arrayOfRanges[0] = new Range(From, To);
                 }
-                else if ((r2.From >= To) || (From >= r2.To))
-                {
-                    arrayOfRanges[0] = new Range(r2.From, To);
-                }
-                else if (From >= r2.To)
+                else if (r2.From >= To)
                 {
                     arrayOfRanges[0] = new Range(From, r2.To);
                 }
+                else if (From >= r2.To)
+                {
+                    arrayOfRanges[0] = new Range(r2.From, To);
+                }
                 else
                 {
-                    arrayOfRanges[0] = new Range(From, To);
+                    arrayOfRanges[0] = new Range(r2.From, r2.To);
                 }
                 return arrayOfRanges;
+            }
+        }
+
+        public Range[] GetDifferentIntervals(Range r2)
+        {
+            if (From < r2.From && To > r2.To)
+            {
+                Range[] arrayOfRanges = new Range[2];
+
+                arrayOfRanges[0] = new Range(From, r2.From - 1);
+
+                Range r3 = new Range(r2.To + 1, To);
+                arrayOfRanges[1] = r3;
+
+                return arrayOfRanges;
+            }
+            else
+            {
+                Range[] arrayOfRanges = new Range[1];
+
+                if ((r2.From > To) || (From > r2.To))
+                {
+                    arrayOfRanges[0] = new Range(From, To);
+                    return arrayOfRanges;
+                }
+                else if (From >= r2.From && To > r2.To)
+                {
+                    arrayOfRanges[0] = new Range(r2.To + 1, To);
+                    return arrayOfRanges;
+                }
+                else if (From < r2.From && To <= r2.To)
+                {
+                    arrayOfRanges[0] = new Range(From, r2.From - 1);
+                    return arrayOfRanges;
+                }
+                else if (To == r2.From)
+                {
+                    arrayOfRanges[0] = new Range(From, To - 1);
+                    return arrayOfRanges;
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
     }
