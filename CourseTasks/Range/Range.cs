@@ -54,51 +54,45 @@ namespace Range
             }
         }
 
-        public Range[] GetArrayOfObject(Range r2)
+        public Range[] GetConcatenationOfIntervals(Range r2)
         {
-
             int x;
+
             if ((r2.From >= To) || (From >= r2.To))
             {
                 x = 2;
+                Range[] arrayOfRanges = new Range[x];
+
+                arrayOfRanges[0] = new Range(From, To);
+                Range r3 = r2;
+                arrayOfRanges[1] = r3;
+
+                return arrayOfRanges;
             }
             else
             {
                 x = 1;
-            }
+                Range[] arrayOfRanges = new Range[x];
 
-            Range[] arrayOfRanges = new Range[x];
-
-            if (x == 2)
-            {
-                Range r = new Range(From, To);
-                arrayOfRanges[0] = r;
-                arrayOfRanges[1] = r2;
-            }
-            else
-            {
                 if (From >= r2.From && To >= r2.To)
                 {
-                    Range r = new Range(From, r2.To);
-                    arrayOfRanges[0] = r;
+                    arrayOfRanges[0] = new Range(From, r2.To);
+
                 }
                 else if (To <= r2.To && r2.From >= From)
                 {
-                    Range r = new Range(r2.From, To);
-                    arrayOfRanges[0] = r;
+                    arrayOfRanges[0] = new Range(r2.From, To);
                 }
                 else if (From <= r2.From && To >= r2.To)
                 {
-                    Range r = new Range(r2.From, r2.To);
-                    arrayOfRanges[0] = r;
+                    arrayOfRanges[0] = new Range(r2.From, r2.To);
                 }
                 else
                 {
-                    Range r = new Range(From, To);
-                    arrayOfRanges[0] = r;
+                    arrayOfRanges[0] = new Range(From, To);
                 }
+                return arrayOfRanges;
             }
-            return arrayOfRanges;
         }
     }
 }

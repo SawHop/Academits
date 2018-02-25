@@ -29,7 +29,7 @@ namespace Range
             }
 
             Range[] arrayResult;
-            arrayResult = r1.GetArrayOfObject(r2);
+            arrayResult = r1.GetConcatenationOfIntervals(r2);
 
             for (int i = 0; i < arrayResult.Length; i++)
             {
