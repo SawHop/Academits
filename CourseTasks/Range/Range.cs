@@ -134,7 +134,8 @@ namespace Range
                 }
                 else
                 {
-                    return null;
+                    arrayOfRanges = new Range[0];
+                    return arrayOfRanges;
                 }
             }
         }

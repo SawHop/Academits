@@ -15,7 +15,7 @@ namespace Range
             double numberInRange = 8;
             r1.IsInside(numberInRange);
 
-            Range r2 = new Range(8, 17);
+            Range r2 = new Range(1, 19);
 
             if (r1.GetGeneral(r2) != null)
             {
@@ -41,16 +41,10 @@ namespace Range
             arrayResult = r1.GetDifferentIntervals(r2);
             Console.WriteLine("Subtraction of intervals");
 
-            if (r1.GetDifferentIntervals(r2) != null)
+            r1.GetDifferentIntervals(r2);
+            for (int i = 0; i < arrayResult.Length; i++)
             {
-                for (int i = 0; i < arrayResult.Length; i++)
-                {
-                    Console.WriteLine("Begin: " + arrayResult[i].From + " End: " + arrayResult[i].To);
-                }
-            }
-            else
-            {
-                Console.WriteLine("Null");
+                Console.WriteLine("Begin: " + arrayResult[i].From + " End: " + arrayResult[i].To);
             }
         }
     }
