@@ -106,9 +106,9 @@ namespace Range
             {
                 Range[] arrayOfRanges = new Range[2];
 
-                arrayOfRanges[0] = new Range(From, r2.From - 1);
+                arrayOfRanges[0] = new Range(From, r2.From);
 
-                Range r3 = new Range(r2.To + 1, To);
+                Range r3 = new Range(r2.To, To);
                 arrayOfRanges[1] = r3;
 
                 return arrayOfRanges;
@@ -117,24 +117,19 @@ namespace Range
             {
                 Range[] arrayOfRanges = new Range[1];
 
-                if ((r2.From > To) || (From > r2.To))
+                if ((r2.From >= To) || (From > r2.To))
                 {
                     arrayOfRanges[0] = new Range(From, To);
                     return arrayOfRanges;
                 }
                 else if (From >= r2.From && To > r2.To)
                 {
-                    arrayOfRanges[0] = new Range(r2.To + 1, To);
+                    arrayOfRanges[0] = new Range(r2.To, To);
                     return arrayOfRanges;
                 }
                 else if (From < r2.From && To <= r2.To)
                 {
-                    arrayOfRanges[0] = new Range(From, r2.From - 1);
-                    return arrayOfRanges;
-                }
-                else if (To == r2.From)
-                {
-                    arrayOfRanges[0] = new Range(From, To - 1);
+                    arrayOfRanges[0] = new Range(From, r2.From);
                     return arrayOfRanges;
                 }
                 else
