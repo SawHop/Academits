@@ -10,7 +10,11 @@ namespace Vector
     {
         static void Main(string[] args)
         {
-            Vector vector = new Vector(0);
+            double[] array = { 1, 2, 3, 4 };
+            Vector vector = new Vector(array);
+
+            Console.WriteLine(vector.getSize());
+            Console.WriteLine(vector.ToString());
         }
     }
 }

@@ -9,50 +9,52 @@ namespace Vector
 
     class Vector
     {
-        private double[] array;
-        int n;
-
-        public int N
-        {
-            set
-            {
-                if (value <= 0)
-                {
-                    Console.WriteLine("Введите размерность вектора");
-                }
-                else
-                {
-                    n = value;
-                }
-            }
-            get { return n; }
-        }
-
+        private double[] vector;
+        private int n;
 
         public Vector(int n)
         {
-            array = new double[n];
+            n = 3;
         }
 
         public Vector(Vector ob)
         {
-            Vector vector = ob;
+            Vector object1 = ob;
         }
 
-        public Vector(double[] array)
+        public Vector(double[] vector)
         {
-            for (int i = 0; i < array.Length; i++)
-            {
-                array[i] = i + 5;
-            }
+            this.vector = vector;
         }
 
-        public Vector(int n, double[] array)
+        public Vector(int n, double[] vector)
         {
-            for (int i = 0; i < array.Length; i++)
+            // TODO проверку n > 0
+            /*
+            try
             {
-
+                for (int i = 0; i < n; i++)
+                {
+                    vector[i] = i;
+                }
             }
+            catch (IllegalArgumentException n) when (n <= 0)
+            {
+               
+            }
+            */
+
+
+        }
+        public double getSize()
+        {
+            double result = vector[n] - vector[0];
+            return result;
+        }
+
+        public string ToString()
+        {
+            return string.Join(", ", vector);
         }
     }
 }
