@@ -9,6 +9,26 @@ namespace Vector
 {
     class Vector
     {
+        [Serializable]
+        internal class IllegalArgumentException : Exception
+        {
+            public IllegalArgumentException()
+            {
+            }
+
+            public IllegalArgumentException(string message) : base(message)
+            {
+                Console.WriteLine("Vector dimension 0");
+            }
+
+            public IllegalArgumentException(string message, Exception innerException) : base(message, innerException)
+            {
+            }
+
+            protected IllegalArgumentException(SerializationInfo info, StreamingContext context) : base(info, context)
+            {
+            }
+        }
 
     private double[] vector;
 
