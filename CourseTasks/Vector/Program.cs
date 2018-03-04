@@ -23,7 +23,7 @@ namespace Vector
             Vector vector2 = new Vector(n);
             Vector vector3 = new Vector(n, arrayOfVectors);
 
-            Console.WriteLine(vector1.getSize());
+            Console.WriteLine(vector1.GetSize());
             Console.WriteLine(vector1.ToString());
         }
     }

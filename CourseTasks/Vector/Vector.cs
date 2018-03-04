@@ -9,82 +9,67 @@ namespace Vector
 {
     class Vector
     {
-        [Serializable]
-        internal class IllegalArgumentException : Exception
-        {
-            public IllegalArgumentException()
-            {
-            }
-
-            public IllegalArgumentException(string message) : base(message)
-            {
-                Console.WriteLine("Vector dimension 0");
-            }
-
-            public IllegalArgumentException(string message, Exception innerException) : base(message, innerException)
-            {
-            }
-
-            protected IllegalArgumentException(SerializationInfo info, StreamingContext context) : base(info, context)
-            {
-            }
-        }
-
-    private double[] vector;
+        private double[] vector;
 
         public Vector(int n)
         {
-            if (n == 0)
+            if (n <= 0)
             {
-                throw new IllegalArgumentException("Vector dimension 0");
+                throw new ArgumentException("Vector dimension 0");
             }
-            for (int i = 0; i < 10; i++)
+            else
             {
-                n++;
+                double[] vector = new double[n];
+                this.vector = vector;
             }
-        }
-
-        public Vector(double[] vector)
-        {
-            this.vector = vector;
         }
 
         public Vector(Vector ob)
         {
-            vector = ob.vector;
+            double[] vector = ob.vector;
+            this.vector = vector;
         }
 
-        public Vector(int n, double[] vector)
+        public Vector(double[] vector)
         {
-            if (n == 0)
-            {
-                throw new IllegalArgumentException("n=0");
-            }
-
-            for (int i = 0; i < 10; i++)
-            {
-                n++;
-            }
-
-            double[] vector1 = new double[n];
-
-            if (vector.Length < n)
-            {
-                for (int i = 0; i < vector.Length; i++)
-                {
-                    vector1[i] = vector[i];
-                }
-            }
+            double[] vector1 = vector;
             this.vector = vector1;
         }
 
-        public double getSize()
+        public Vector(int n, double[] vector) : this(vector)
         {
-            double result = vector[vector.Length - 1] - vector[0];
-            return result;
+            if (n <= 0)
+            {
+                throw new ArgumentException("Vector dimension 0");
+            }
+            else
+            {
+                double[] vector1 = new double[n];
+
+                if (vector.Length < n)
+                {
+                    for (int i = 0; i < vector.Length; i++)
+                    {
+                        vector1[i] = vector[i];
+                    }
+                    this.vector = vector1;
+                }
+            }
         }
 
-        public string ToString()
+        public double GetSize()
+        {
+            double result = 0;
+            double sum = 0;
+            for (int i = 0; i < vector.Length; i++)
+            {
+                sum = Math.Pow(vector[i], 2);
+                result += sum;
+            }
+            return Math.Sqrt(result);
+        }
+
+        public override string ToString()
         {
             return string.Join(", ", vector);
         }
