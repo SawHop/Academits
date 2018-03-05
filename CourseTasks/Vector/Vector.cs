@@ -32,8 +32,7 @@ namespace Vector
 
         public Vector(double[] vector)
         {
-            double[] vector1 = vector;
-            this.vector = vector1;
+            this.vector = vector;
         }
 
         public Vector(int n, double[] vector) : this(vector)
