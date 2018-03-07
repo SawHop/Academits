@@ -11,7 +11,7 @@ namespace Vector
     {
         static void Main(string[] args)
         {
-            double[] arrayOfVectors = { 1, 2, 3, 4 };
+            double[] arrayOfVectors = { 71, 213, 235, 4 };//new double[0];
             int n = 0;
             for (int i = 0; i < arrayOfVectors.Length; i++)
             {
@@ -23,7 +23,7 @@ namespace Vector
             Vector vector2 = new Vector(n);
             Vector vector3 = new Vector(n, arrayOfVectors);
 
-            Console.WriteLine(vector1.GetSize());
+            Console.WriteLine("Vector size=" + vector1.GetVectorSize());
             Console.WriteLine(vector1.ToString());
         }
     }

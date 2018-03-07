@@ -26,13 +26,21 @@ namespace Vector
 
         public Vector(Vector ob)
         {
-            double[] vector = ob.vector;
-            this.vector = vector;
+            Vector ob1 = new Vector(1);
+            ob1 = new Vector(ob.vector);
+            this.vector = ob1.vector;
         }
 
         public Vector(double[] vector)
         {
-            this.vector = vector;
+            if (vector.Length <= 0)
+            {
+                throw new ArgumentException("Vector dimension 0");
+            }
+            else
+            {
+                this.vector = vector;
+            }
         }
 
         public Vector(int n, double[] vector) : this(vector)
@@ -43,34 +51,29 @@ namespace Vector
             }
             else
             {
-                double[] vector1 = new double[n];
-
                 if (vector.Length < n)
                 {
                     for (int i = 0; i < vector.Length; i++)
                     {
-                        vector1[i] = vector[i];
+                        this.vector[i] = vector[i];
                     }
-                    this.vector = vector1;
                 }
             }
         }
 
-        public double GetSize()
+        public double GetVectorSize()
         {
             double result = 0;
-            double sum = 0;
-            for (int i = 0; i < vector.Length; i++)
+            foreach (int e in vector)
             {
-                sum = Math.Pow(vector[i], 2);
-                result += sum;
+                result++;
             }
-            return Math.Sqrt(result);
+            return result;
         }
 
         public override string ToString()
         {
-            return string.Join(", ", vector);
+            return "{ " + string.Join(", ", vector) + " }";
         }
     }
 }
