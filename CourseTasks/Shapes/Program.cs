@@ -29,10 +29,10 @@ namespace Shapes
             notSortedObjects.Add(c1);
             notSortedObjects.Add(c2);
 
-            CompInv<IShape> sortedObjects = new CompInv<IShape>();
+            CompArea<IShape> sortedObjects = new CompArea<IShape>();
             notSortedObjects.Sort(sortedObjects);
 
-            CompInv1<IShape> sortedObjects1 = new CompInv1<IShape>();
+            CompPerimeter<IShape> sortedObjects1 = new CompPerimeter<IShape>();
             notSortedObjects.Sort(sortedObjects1);
 
             for (int i = 0; i < notSortedObjects.Count; i++)

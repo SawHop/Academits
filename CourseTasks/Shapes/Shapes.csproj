@@ -43,8 +43,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Circle.cs" />
-    <Compile Include="CompInv.cs" />
-    <Compile Include="CompInv1.cs" />
+    <Compile Include="CompArea.cs" />
+    <Compile Include="CompPerimeter.cs" />
     <Compile Include="IShape.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

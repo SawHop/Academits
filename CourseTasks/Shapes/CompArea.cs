@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace Shapes
 {
-    class CompInv<T> : IComparer<T>
-         where T : IShape
+    class CompArea<T> : IComparer<IShape>
     {
-        public int Compare(T x, T y)
+        public int Compare(IShape x, IShape y)
         {
             if (x.GetArea() < y.GetArea())
             {
