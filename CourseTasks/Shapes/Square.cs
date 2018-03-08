@@ -6,25 +6,31 @@ using System.Threading.Tasks;
 
 namespace Shapes
 {
-    public class Square : Rectangle
+    public class Square : IShape
     {
-        public Square(double width)
-            : base(width, 0)
-        {
+        private double width;
 
+        public Square(double width)
+        {
+            this.width = width;
         }
 
-        public override double GetHeight()
+        public double GetWidth()
         {
             return width;
         }
 
-        public override double GetArea()
+        public double GetHeight()
+        {
+            return width;
+        }
+
+        public double GetArea()
         {
             return Math.Pow(width, 2);
         }
 
-        public override double GetPerimeter()
+        public double GetPerimeter()
         {
             return (width * 4);
         }
@@ -34,10 +40,12 @@ namespace Shapes
             return "width: " + width;
         }
 
-        public override bool Equals(Object obj)
+        public override bool Equals(object obj)
         {
             if (obj == null || GetType() != obj.GetType())
+            {
                 return false;
+            }
 
             Square s1 = (Square)obj;
             return (width == s1.width);
@@ -45,7 +53,7 @@ namespace Shapes
 
         public override int GetHashCode()
         {
-            return (int)width ^ (int)height;
+            return (int)width;
         }
     }
 }

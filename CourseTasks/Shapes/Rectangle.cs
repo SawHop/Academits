@@ -8,8 +8,8 @@ namespace Shapes
 {
     public class Rectangle : IShape
     {
-        protected double width;
-        protected double height;
+        private double width;
+        private double height;
 
         public Rectangle(double width, double height)
         {
@@ -17,22 +17,22 @@ namespace Shapes
             this.height = height;
         }
 
-        public virtual double GetWidth()
+        public double GetWidth()
         {
             return width;
         }
 
-        public virtual double GetHeight()
+        public double GetHeight()
         {
             return height;
         }
 
-        public virtual double GetArea()
+        public double GetArea()
         {
             return width * height;
         }
 
-        public virtual double GetPerimeter()
+        public double GetPerimeter()
         {
             return (width + height) * 2;
         }
@@ -42,10 +42,12 @@ namespace Shapes
             return "width: " + width + " height:" + height;
         }
 
-        public override bool Equals(Object obj)
+        public override bool Equals(object obj)
         {
             if (obj == null || GetType() != obj.GetType())
+            {
                 return false;
+            }
 
             Rectangle r1 = (Rectangle)obj;
             return (width == r1.width) && (height == r1.height);

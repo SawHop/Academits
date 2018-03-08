@@ -7,15 +7,22 @@ using System.Threading.Tasks;
 namespace Shapes
 {
     class CompInv<T> : IComparer<T>
-         where T : Rectangle
+         where T : IShape
     {
         public int Compare(T x, T y)
         {
             if (x.GetArea() < y.GetArea())
+            {
                 return 1;
+            }
             if (x.GetArea() > y.GetArea())
+            {
                 return -1;
-            else return 0;
+            }
+            else
+            {
+                return 0;
+            }
         }
     }
 }

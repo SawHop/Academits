@@ -26,6 +26,7 @@ namespace Vector
 
         public Vector(Vector ob)
         {
+            //TODO Конструктор копирования
             Vector ob1 = new Vector(1);
             ob1 = new Vector(ob.vector);
             this.vector = ob1.vector;
@@ -74,6 +75,20 @@ namespace Vector
         public override string ToString()
         {
             return "{ " + string.Join(", ", vector) + " }";
+        }
+
+        public double[] GetSumVectors(double[] array)
+        {
+            int[] numbers;
+            int length;
+            if (vector.Length=>array.Length)
+            {
+                length = vector.Length
+            }
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                Console.WriteLine(numbers[i]);
+            }
         }
     }
 }

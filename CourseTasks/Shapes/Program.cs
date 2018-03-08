@@ -21,7 +21,7 @@ namespace Shapes
 
             Circle c2 = new Circle(7);
 
-            List<Rectangle> notSortedObjects = new List<Rectangle>();
+            List<IShape> notSortedObjects = new List<IShape>();
 
             notSortedObjects.Add(s1);
             notSortedObjects.Add(r1);
@@ -29,10 +29,10 @@ namespace Shapes
             notSortedObjects.Add(c1);
             notSortedObjects.Add(c2);
 
-            CompInv<Rectangle> sortedObjects = new CompInv<Rectangle>();
+            CompInv<IShape> sortedObjects = new CompInv<IShape>();
             notSortedObjects.Sort(sortedObjects);
 
-            CompInv1<Rectangle> sortedObjects1 = new CompInv1<Rectangle>();
+            CompInv1<IShape> sortedObjects1 = new CompInv1<IShape>();
             notSortedObjects.Sort(sortedObjects1);
 
             for (int i = 0; i < notSortedObjects.Count; i++)
