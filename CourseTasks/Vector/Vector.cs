@@ -27,6 +27,7 @@ namespace Vector
         public Vector(Vector ob)
         {
             //TODO Конструктор копирования
+            //TODO Проверка
             Vector ob1 = new Vector(1);
             ob1 = new Vector(ob.vector);
             this.vector = ob1.vector;
@@ -77,18 +78,21 @@ namespace Vector
             return "{ " + string.Join(", ", vector) + " }";
         }
 
-        public double[] GetSumVectors(double[] array)
+        public double[] GetSumVectors(double[] vector1)
         {
-            int[] numbers;
-            int length;
-            if (vector.Length=>array.Length)
+            if (vector.Length >= vector1.Length)
             {
-                length = vector.Length
+
             }
-            for (int i = 0; i < numbers.Length; i++)
-            {
-                Console.WriteLine(numbers[i]);
-            }
+
+
+
+
+
+
+
+
+            return vector1;
         }
     }
 }

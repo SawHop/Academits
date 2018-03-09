@@ -27,6 +27,7 @@ namespace Vector
             Console.WriteLine(vector1.ToString());
 
             double[] arrayOfVectors1 = { 21, 17, 33, 41 };
+            arrayOfVectors.GetSumVectors(arrayOfVectors1);
         }
     }
 }
