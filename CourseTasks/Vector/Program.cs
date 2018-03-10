@@ -11,7 +11,7 @@ namespace Vector
     {
         static void Main(string[] args)
         {
-            double[] arrayOfVectors = { 14, 21, 35, 4 };
+            double[] arrayOfVectors = { 14, 21, 35, 4, 5, 8 };
             int n = 0;
             for (int i = 0; i < arrayOfVectors.Length; i++)
             {
@@ -26,8 +26,35 @@ namespace Vector
             Console.WriteLine("Vector size=" + vector1.GetVectorSize());
             Console.WriteLine(vector1.ToString());
 
-            double[] arrayOfVectors1 = { 21, 17, 33, 41 };
-            arrayOfVectors.GetSumVectors(arrayOfVectors1);
+            double[] arrayOfVectors1 = { 21, 17, 33, 41, 2, 3, 6, 9 };
+
+            Console.WriteLine();
+            foreach (int e in vector.GetSumVectors(arrayOfVectors1))
+            {
+                Console.Write(e + " ");
+            }
+            Console.WriteLine();
+
+            foreach (int e in vector.GetDifferenceVectors(arrayOfVectors1))
+            {
+                Console.Write(e + " ");
+            }
+            Console.WriteLine();
+
+            double scalar = 3;
+            foreach (int e in vector.GetVectorMultipliedByScalar(scalar))
+            {
+                Console.Write(e + " ");
+            }
+            Console.WriteLine();
+
+            foreach (int e in vector.GetRotationVector())
+            {
+                Console.Write(e + " ");
+            }
+            Console.WriteLine();
+
+            Console.WriteLine("Vector length=" + vector.GetLengthVector());
         }
     }
 }

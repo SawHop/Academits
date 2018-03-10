@@ -6,53 +6,59 @@ using System.Threading.Tasks;
 
 namespace Shapes
 {
-    public class Circle : IShape
+    public class Square : IShape
     {
-        private double radius;
+        private double width;
 
-        public Circle(double radius)
+        public Square(double width)
         {
-            this.radius = radius;
+            this.width = width;
         }
 
         public double GetWidth()
         {
-            return radius * 2;
+            return width;
         }
 
         public double GetHeight()
         {
-            return radius * 2;
+            return width;
         }
 
         public double GetArea()
         {
-            return Math.PI * Math.Pow(radius, 2);
+            return Math.Pow(width, 2);
         }
 
         public double GetPerimeter()
         {
-            return radius * 2 * Math.PI;
+            return (width * 4);
         }
 
         public override string ToString()
         {
-            return "Radius: " + radius;
+            return "Square: " + "width: " + width;
         }
 
         public override bool Equals(object obj)
         {
+            if (this == obj)
+            {
+                return true;
+            }
+
             if (obj == null || GetType() != obj.GetType())
             {
                 return false;
             }
-            Circle c1 = (Circle)obj;
-            return (radius == c1.radius);
+
+            Square s1 = (Square)obj;
+            return (width == s1.width);
         }
 
         public override int GetHashCode()
         {
-            return (int)radius;
+            return (int)width;
         }
     }
 }

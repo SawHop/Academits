@@ -27,34 +27,12 @@ namespace Shapes
 
         public double GetWidth()
         {
-            if ((x1 >= x2) & (x1 >= x3))
-            {
-                return x1;
-            }
-            else if ((x3 >= x2) & (x1 <= x3))
-            {
-                return x3;
-            }
-            else
-            {
-                return x2;
-            }
+            return Math.Max(Math.Max(x3, x1), x2) - Math.Min(Math.Min(x3, x1), x2);
         }
 
         public double GetHeight()
         {
-            if ((y1 >= x2) & (y1 >= x3))
-            {
-                return y1;
-            }
-            else if ((x3 >= x2) & (y1 <= x3))
-            {
-                return y3;
-            }
-            else
-            {
-                return y2;
-            }
+            return Math.Max(Math.Max(y3, y1), y2) - Math.Min(Math.Min(y3, y1), y2);
         }
 
         public double GetArea()
@@ -62,7 +40,7 @@ namespace Shapes
             return 0.5 * ((x1 - x3) * (y2 - y3) + (x2 - x3) * (y1 - y3));
         }
 
-        public double GetLengthOfSideOfTriangle(double x1, double y1, double x2, double y2)
+        private double GetLengthOfSideOfTriangle(double x1, double y1, double x2, double y2)
         {
             return Math.Sqrt(Math.Pow((x2 - x1), 2) + Math.Pow((y2 - y1), 2));
         }
@@ -77,11 +55,16 @@ namespace Shapes
 
         public override string ToString()
         {
-            return "x1: " + x1 + " y1:" + y1 + "x2: " + x2 + " y2:" + y2 + "x3: " + x3 + " y3:" + y3;
+            return "Triangle" + "x1: " + x1 + " y1:" + y1 + "x2: " + x2 + " y2:" + y2 + "x3: " + x3 + " y3:" + y3;
         }
 
         public override bool Equals(object obj)
         {
+            if (this == obj)
+            {
+                return true;
+            }
+
             if (obj == null || GetType() != obj.GetType())
             {
                 return false;
