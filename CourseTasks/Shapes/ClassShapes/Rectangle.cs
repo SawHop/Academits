@@ -39,7 +39,7 @@ namespace Shapes
 
         public override string ToString()
         {
-            return "Rectangle: " + "width: " + width + " height:" + height;
+            return "Rectangle: width:" + width + ", height:" + height;
         }
 
         public override bool Equals(object obj)

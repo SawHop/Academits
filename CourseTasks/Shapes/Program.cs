@@ -19,20 +19,34 @@ namespace Shapes
             Circle c1 = new Circle(4);
 
             Circle c2 = new Circle(7);
+            Console.WriteLine(r1.ToString());
 
-            IShape[] notSortedObjects = new IShape[5];
+            List<IShape> notSortedObjects = new List<IShape>();
 
-            notSortedObjects[0] = r1;
-            notSortedObjects[1] = s1;
-            notSortedObjects[2] = t1;
-            notSortedObjects[3] = c1;
-            notSortedObjects[4] = c1;
+            notSortedObjects.Add(s1);
+            notSortedObjects.Add(r1);
+            notSortedObjects.Add(t1);
+            notSortedObjects.Add(c1);
+            notSortedObjects.Add(c2);
 
-            Array.Sort(notSortedObjects, new CompArea());
-            Console.WriteLine("Max area=" + notSortedObjects[4].GetArea());
+            CompArea sortedObjects = new CompArea();
+            notSortedObjects.Sort(sortedObjects);
 
-            Array.Sort(notSortedObjects, new CompPerimeter());
-            Console.WriteLine("Second perimeter=" + notSortedObjects[3].GetPerimeter());
+            CompPerimeter sortedObjects1 = new CompPerimeter();
+            notSortedObjects.Sort(sortedObjects1);
+
+            for (int i = 0; i < notSortedObjects.Count; i++)
+            {
+                if (i == 0)
+                {
+                    Console.WriteLine("Max area=" + notSortedObjects[i].GetArea());
+                }
+                else if (i == 1)
+                {
+                    Console.WriteLine("Second perimeter=" + notSortedObjects[i].GetPerimeter());
+                }
+            }
+            Console.ReadKey();
         }
     }
 }

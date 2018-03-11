@@ -37,7 +37,7 @@ namespace Shapes
 
         public override string ToString()
         {
-            return "Circle: " + "Radius: " + radius;
+            return "Circle: Radius:" + radius;
         }
 
         public override bool Equals(object obj)

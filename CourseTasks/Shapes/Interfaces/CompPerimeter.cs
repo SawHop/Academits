@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Shapes
 {
-    class CompPerimeter: IComparer<IShape>
+    class CompPerimeter : IComparer<IShape>
     {
         public int Compare(IShape x, IShape y)
         {
-            return x.GetPerimeter().CompareTo(y.GetPerimeter());
+            return y.GetPerimeter().CompareTo(x.GetPerimeter());
         }
     }
 }

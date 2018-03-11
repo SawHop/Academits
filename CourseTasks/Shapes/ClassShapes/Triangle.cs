@@ -40,22 +40,19 @@ namespace Shapes
             return 0.5 * ((x1 - x3) * (y2 - y3) + (x2 - x3) * (y1 - y3));
         }
 
-        private double GetLengthOfSideOfTriangle(double x1, double y1, double x2, double y2)
+        public double GetLengthOfSideOfTriangle(double x1, double y1, double x2, double y2)
         {
             return Math.Sqrt(Math.Pow((x2 - x1), 2) + Math.Pow((y2 - y1), 2));
         }
 
         public double GetPerimeter()
         {
-            double lengthOfSideOfTriangle = Math.Sqrt(Math.Pow((x2 - x1), 2) + Math.Pow((y2 - y1), 2));
-            double lengthOfSideOfTriangle2 = Math.Sqrt(Math.Pow((x3 - x2), 2) + Math.Pow((y3 - y2), 2));
-            double lengthOfSideOfTriangle3 = Math.Sqrt(Math.Pow((x3 - x1), 2) + Math.Pow((y3 - y1), 2));
-            return lengthOfSideOfTriangle + lengthOfSideOfTriangle2 + lengthOfSideOfTriangle3;
+            return GetLengthOfSideOfTriangle(x1, y1, x2, y2) + GetLengthOfSideOfTriangle(x2, y2, x3, y3) + GetLengthOfSideOfTriangle(x1, y1, x3, y3);
         }
 
         public override string ToString()
         {
-            return "Triangle" + "x1: " + x1 + " y1:" + y1 + "x2: " + x2 + " y2:" + y2 + "x3: " + x3 + " y3:" + y3;
+            return "Triangle: x1:" + x1 + ", y1:" + y1 + ", x2:" + x2 + ", y2:" + y2 + ", x3:" + x3 + ", y3:" + y3;
         }
 
         public override bool Equals(object obj)

@@ -37,7 +37,7 @@ namespace Shapes
 
         public override string ToString()
         {
-            return "Square: " + "width: " + width;
+            return "Square: width:" + width;
         }
 
         public override bool Equals(object obj)
