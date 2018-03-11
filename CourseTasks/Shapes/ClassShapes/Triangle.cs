@@ -40,7 +40,7 @@ namespace Shapes
             return 0.5 * ((x1 - x3) * (y2 - y3) + (x2 - x3) * (y1 - y3));
         }
 
-        public double GetLengthOfSideOfTriangle(double x1, double y1, double x2, double y2)
+        private double GetLengthOfSideOfTriangle(double x1, double y1, double x2, double y2)
         {
             return Math.Sqrt(Math.Pow((x2 - x1), 2) + Math.Pow((y2 - y1), 2));
         }

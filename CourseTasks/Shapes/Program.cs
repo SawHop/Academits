@@ -35,17 +35,8 @@ namespace Shapes
             CompPerimeter sortedObjects1 = new CompPerimeter();
             notSortedObjects.Sort(sortedObjects1);
 
-            for (int i = 0; i < notSortedObjects.Count; i++)
-            {
-                if (i == 0)
-                {
-                    Console.WriteLine("Max area=" + notSortedObjects[i].GetArea());
-                }
-                else if (i == 1)
-                {
-                    Console.WriteLine("Second perimeter=" + notSortedObjects[i].GetPerimeter());
-                }
-            }
+            Console.WriteLine("Max area=" + notSortedObjects[0].GetArea());
+            Console.WriteLine("Second perimeter=" + notSortedObjects[1].GetPerimeter());
             Console.ReadKey();
         }
     }

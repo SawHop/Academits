@@ -24,13 +24,9 @@ namespace Vector
             }
         }
 
-        public Vector(Vector ob)
+        public Vector(Vector ob) 
         {
-            //TODO Конструктор копирования
-            //TODO Проверка
-            Vector ob1 = new Vector(1);
-            ob1 = new Vector(ob.vector);
-            this.vector = ob1.vector;
+          
         }
 
         public Vector(double[] vector)
