@@ -24,9 +24,9 @@ namespace Vector
             }
         }
 
-        public Vector(Vector ob) 
+        public Vector(Vector ob) : this(ob.vector)
         {
-          
+
         }
 
         public Vector(double[] vector)
@@ -75,7 +75,7 @@ namespace Vector
             return "{ " + string.Join(", ", vector) + " }";
         }
 
-        public double[] GetSumVectors(double[] vector1)
+        public double[] GetAdditionVectors(double[] vector1)
         {
             double[] result;
             if (vector.Length > vector1.Length)
@@ -188,6 +188,162 @@ namespace Vector
                 result += sum;
             }
             return Math.Sqrt(result);
+        }
+
+        public double GetIndex(int index)
+        {
+            return vector[index];
+        }
+
+        public void SetIndex(int index, double value)
+        {
+            vector[index] = value;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (this == obj)
+            {
+                return true;
+            }
+
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+            Vector vector1 = (Vector)obj;
+            return (vector == vector1.vector);
+        }
+
+        public override int GetHashCode()
+        {
+            int prime = 37;
+            int hash = 1;
+            foreach (double e in vector)
+            {
+                hash = prime * hash + (int)e;
+            }
+            return hash;
+        }
+
+        public static double[] GetAdditionVectors1(double[] vector, double[] vector1)
+        {
+            double[] result;
+            if (vector.Length > vector1.Length)
+            {
+                result = new double[vector.Length];
+                for (int i = 0; i < vector1.Length; i++)
+                {
+                    result[i] = vector1[i];
+                }
+
+                for (int i = 0; i < vector.Length; i++)
+                {
+                    result[i] = result[i] + vector[i];
+                }
+            }
+            else if (vector.Length < vector1.Length)
+            {
+                result = new double[vector1.Length];
+                for (int i = 0; i < vector.Length; i++)
+                {
+                    result[i] = vector[i];
+                }
+
+                for (int i = 0; i < vector1.Length; i++)
+                {
+                    result[i] = result[i] + vector1[i];
+                }
+            }
+            else
+            {
+                result = new double[vector1.Length];
+                for (int i = 0; i < vector1.Length; i++)
+                {
+                    result[i] = vector[i] + vector1[i];
+                }
+            }
+            return result;
+        }
+
+        public static double[] GetDifferenceVectors1(double[] vector, double[] vector1)
+        {
+            double[] result;
+            if (vector.Length > vector1.Length)
+            {
+                result = new double[vector.Length];
+                for (int i = 0; i < vector1.Length; i++)
+                {
+                    result[i] = vector1[i];
+                }
+
+                for (int i = 0; i < vector.Length; i++)
+                {
+                    result[i] = result[i] - vector[i];
+                }
+            }
+            else if (vector.Length < vector1.Length)
+            {
+                result = new double[vector1.Length];
+                for (int i = 0; i < vector.Length; i++)
+                {
+                    result[i] = vector[i];
+                }
+
+                for (int i = 0; i < vector1.Length; i++)
+                {
+                    result[i] = result[i] - vector1[i];
+                }
+            }
+            else
+            {
+                result = new double[vector1.Length];
+                for (int i = 0; i < vector1.Length; i++)
+                {
+                    result[i] = vector[i] - vector1[i];
+                }
+            }
+            return result;
+        }
+
+        public static double[] GetVectorMultipliedByAnotherVector(double[] vector, double[] vector1)
+        {
+            double[] result;
+            if (vector.Length > vector1.Length)
+            {
+                result = new double[vector.Length];
+                for (int i = 0; i < vector1.Length; i++)
+                {
+                    result[i] = vector1[i];
+                }
+
+                for (int i = 0; i < vector.Length; i++)
+                {
+                    result[i] = result[i] * vector[i];
+                }
+            }
+            else if (vector.Length < vector1.Length)
+            {
+                result = new double[vector1.Length];
+                for (int i = 0; i < vector.Length; i++)
+                {
+                    result[i] = vector[i];
+                }
+
+                for (int i = 0; i < vector1.Length; i++)
+                {
+                    result[i] = result[i] * vector1[i];
+                }
+            }
+            else
+            {
+                result = new double[vector1.Length];
+                for (int i = 0; i < vector1.Length; i++)
+                {
+                    result[i] = vector[i] * vector1[i];
+                }
+            }
+            return result;
         }
     }
 }

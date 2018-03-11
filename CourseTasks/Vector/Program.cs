@@ -29,7 +29,7 @@ namespace Vector
             double[] arrayOfVectors1 = { 21, 17, 33, 41, 2, 3, 6, 9 };
 
             Console.WriteLine();
-            foreach (int e in vector.GetSumVectors(arrayOfVectors1))
+            foreach (int e in vector.GetAdditionVectors(arrayOfVectors1))
             {
                 Console.Write(e + " ");
             }
@@ -55,6 +55,11 @@ namespace Vector
             Console.WriteLine();
 
             Console.WriteLine("Vector length=" + vector.GetLengthVector());
+
+            Console.WriteLine(vector.GetIndex(2));
+            vector.SetIndex(2, 4);
+
+            Console.ReadKey();
         }
     }
 }
