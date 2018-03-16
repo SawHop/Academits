@@ -11,7 +11,7 @@ namespace Vector
     {
         static void Main(string[] args)
         {
-            double[] arrayOfVectors = { 14, 21, 35, 4, 5, 8, 3 };
+            double[] arrayOfVectors = { 21, 17, 33, 41, 2, 3, 6, 9 };
             int n = 0;
             for (int i = 0; i < arrayOfVectors.Length; i++)
             {
@@ -24,27 +24,26 @@ namespace Vector
             Vector vector3 = new Vector(n, arrayOfVectors);
 
             Console.WriteLine("Vector size=" + vector1.GetSize());
-            Console.WriteLine(vector1.ToString());
 
             double[] arrayOfVectors1 = { 21, 17, 33, 41, 2, 3, 6, 9 };
             Vector vector4 = new Vector(arrayOfVectors1);
+            Console.WriteLine("Equals=" + vector1.Equals(vector4));
 
-            Console.WriteLine(vector1.GetAddition(vector4));
-            Console.WriteLine(vector.GetDifference(vector4));
+            Console.WriteLine("Sum of vectors=" + vector1.GetAddition(vector4));
+            Console.WriteLine("Difference of vecrotrs=" + vector.GetDifference(vector4));
 
             double scalar = 3;
-            Console.WriteLine(vector.GetMultipliedByScalar(scalar));
+            Console.WriteLine("Vector multiplied by scalar=" + vector.GetMultipliedByScalar(scalar));
 
-            double number = -1;
-            Console.WriteLine(vector.GetRotation(number));
+            Console.WriteLine("Vector rotation=" + vector.GetRotation());
             Console.WriteLine("Vector length=" + vector.GetLength());
 
-            Console.WriteLine(vector.GetComponentOfVector(2));
-            vector.SetComponentOfVector(2, 4);
+            Console.WriteLine(vector.GetComponent(2));
+            vector.SetComponent(2, 4);
 
-            Console.WriteLine(Vector.GetAdditionVectors(vector1, vector4));
-            Console.WriteLine(Vector.GetDifferenceVectors(vector1, vector4));
-            Console.WriteLine(Vector.GetVectorMultipliedByAnotherVector(vector1, vector4));
+            Console.WriteLine("Static sum of vectors=" + Vector.GetAdditionVectors(vector1, vector4));
+            Console.WriteLine("Static difference of vecrotrs=" + Vector.GetDifferenceVectors(vector1, vector4));
+            Console.WriteLine("Scalar multiplied of vectors=" + Vector.GetVectorMultipliedByAnotherVector(vector1, vector4));
             Console.Read();
         }
     }
