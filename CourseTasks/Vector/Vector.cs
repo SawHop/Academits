@@ -83,7 +83,8 @@ namespace Vector
                 vector = array;
             }
 
-            for (int i = 0; i < Math.Min(vector.Length, vector1.vector.Length); i++)
+            int length = Math.Min(vector.Length, vector1.vector.Length);
+            for (int i = 0; i < length; i++)
             {
                 vector[i] += vector1.vector[i];
             }
@@ -100,7 +101,8 @@ namespace Vector
                 vector = array;
             }
 
-            for (int i = 0; i < Math.Min(vector.Length, vector1.vector.Length); i++)
+            int length = Math.Min(vector.Length, vector1.vector.Length);
+            for (int i = 0; i < length; i++)
             {
                 vector[i] -= vector1.vector[i];
             }
@@ -160,7 +162,7 @@ namespace Vector
             {
                 return false;
             }
-            for (int i = 0; i < Math.Max(vector.Length, vector1.vector.Length); ++i)
+            for (int i = 0; i < vector.Length; ++i)
             {
                 if (vector1.vector[i] != vector[i])
                 {
@@ -183,22 +185,22 @@ namespace Vector
 
         public static Vector GetAdditionVectors(Vector vector1, Vector vector2)
         {
-            Vector result = new Vector(new double[vector1.vector.Length]);
-            Array.Copy(vector1.vector, result.vector, vector1.vector.Length);
+            Vector result = new Vector(vector1);
             return result.GetAddition(vector2);
         }
 
         public static Vector GetDifferenceVectors(Vector vector1, Vector vector2)
         {
-            Vector result = new Vector(new double[vector1.vector.Length]);
-            Array.Copy(vector1.vector, result.vector, vector1.vector.Length);
+            Vector result = new Vector(vector1);
             return result.GetDifference(vector2);
         }
 
         public static double GetVectorMultipliedByAnotherVector(Vector vector1, Vector vector2)
         {
             double result = 0;
-            for (int i = 0; i < Math.Min(vector1.vector.Length, vector2.vector.Length); i++)
+            int length = Math.Min(vector1.vector.Length, vector2.vector.Length);
+
+            for (int i = 0; i < length; i++)
             {
                 result += vector1.vector[i] * vector2.vector[i];
             }
