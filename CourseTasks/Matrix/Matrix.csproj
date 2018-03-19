@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E0A4A54E-6B20-4F5F-AAB2-CC7E709FBEA6}</ProjectGuid>
+    <ProjectGuid>{E0125AE8-7C27-4914-9496-165081ED376E}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Vector</RootNamespace>
-    <AssemblyName>Vector</AssemblyName>
+    <RootNamespace>Matrix</RootNamespace>
+    <AssemblyName>Matrix</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -42,12 +42,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Matrix.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Vector.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Vector\Vectors.csproj">
+      <Project>{e0a4a54e-6b20-4f5f-aab2-cc7e709fbea6}</Project>
+      <Name>Vectors</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

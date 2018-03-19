@@ -5,9 +5,9 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Vector
+namespace Vectors
 {
-    class Vector
+    public class Vector
     {
         private double[] vector;
 
