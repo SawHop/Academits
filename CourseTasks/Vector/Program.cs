@@ -41,7 +41,6 @@ namespace Vectors
             Console.WriteLine(vector.GetComponent(2));
             vector.SetComponent(2, 4);
 
-            Console.WriteLine("123123123adsasdasd"+vector1);
             Console.WriteLine("Static sum of vectors=" + Vector.GetAdditionVectors(vector1, vector4));
             Console.WriteLine("Static difference of vecrotrs=" + Vector.GetDifferenceVectors(vector1, vector4));
             Console.WriteLine("Scalar multiplied of vectors=" + Vector.GetVectorMultipliedByAnotherVector(vector1, vector4));

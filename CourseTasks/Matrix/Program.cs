@@ -11,13 +11,14 @@ namespace Matrix
     {
         static void Main(string[] args)
         {
-            int m = 4;
-            int n = 5;
-            Matrix matrix = new Matrix(n, m);
-            Matrix matrix1 = new Matrix(matrix);
+            int colums = 3;
+            int rows = 3;
+            Matrix matrix = new Matrix(colums, rows);
 
-            double[,] vector = new double[4, 3] { { 7, 12, 5 }, { 2, 37, 8 }, { 44, 5, 31 }, { 7, 11, 17 } };
+            double[,] vector = new double[3, 3] { { 7, 12, 5 }, { 2, 37, 8 }, { 44, 5, 31 } };
             Matrix matrix2 = new Matrix(vector);
+
+            Matrix matrix1 = new Matrix(matrix2);
 
             Vector[] vector1 = new Vector[2];
             {
@@ -28,24 +29,79 @@ namespace Matrix
             }
             Matrix matrix3 = new Matrix(vector1);
 
-            Console.Write("Matrix size=");
-            foreach (int e in matrix2.GetSize())
-            {
-                Console.Write(e + ",");
-            }
+            Console.WriteLine("Colums=" + matrix2.GetColums());
+            Console.WriteLine("Rows=" + matrix2.GetRows());
             Console.WriteLine();
 
-            Console.WriteLine(matrix2.GetVector1(2));
+            Console.WriteLine(matrix2.GetVectorRows(2));
 
-            double[] array = new double[] { 1, 2, 3, 4 };
-            matrix2.SetVector2(2, array);
+            double[] array = new double[] { 8, 3, 7 };
+            matrix2.SetVectorRows(2, array);
 
-            Console.WriteLine(matrix2.GetVector3(2));
+            Console.WriteLine(matrix2.GetVectorColums(2));
 
             Console.WriteLine(matrix2);
+            Console.WriteLine();
 
             double scalar = 2;
-            Console.WriteLine("Matrix multiplied by scalar=" + matrix2.GetMultipliedByScalar1(scalar));
+            Console.Write("Matrix multiplied by scalar=");
+            foreach (var e in matrix2.GetMultipliedByScalar(scalar))
+            {
+                Console.Write(e);
+            }
+            Console.WriteLine("\n");
+
+            Console.Write("Transposed matrix=");
+            foreach (var e in matrix2.GetTranspose())
+            {
+                Console.Write(e);
+            }
+            Console.WriteLine("\n");
+
+            // Console.WriteLine(matrix2.GetDeterminant());
+
+            Vector vector2 = new Vector(array);
+            Console.Write("Multiplied matrix by vector=" + matrix2.GetMultiplied(vector2));
+            Console.WriteLine("\n");
+
+            double[,] vector3 = new double[3, 3] { { 5, 2, 1 }, { 7, 4, 8 }, { 14, 15, 1 } };
+            Matrix matrix5 = new Matrix(vector3);
+
+            Console.Write("Sum of matrix=");
+            foreach (var e in matrix2.GetAddition(matrix5))
+            {
+                Console.Write(e);
+            }
+            Console.WriteLine("\n");
+
+            Console.Write("Difference of matrix = ");
+            foreach (var e in matrix2.GetDifference(matrix5))
+            {
+                Console.Write(e);
+            }
+            Console.WriteLine("\n");
+
+            Console.Write("Static sum of matrix=");
+            foreach (var e in Matrix.GetAdditionMatrix(matrix2, matrix5))
+            {
+                Console.Write(e);
+            }
+            Console.WriteLine("\n");
+
+            Console.Write("Static difference of matrix=");
+            foreach (var e in Matrix.GetDifferenceMatrix(matrix2, matrix5))
+            {
+                Console.Write(e);
+            }
+            Console.WriteLine("\n");
+
+            Console.Write("Static multiplied matrixs=");
+            foreach (var e in Matrix.GetMultipliedMatrix(matrix2, matrix5))
+            {
+                Console.Write(e);
+            }
+            Console.WriteLine();
+            Console.Read();
         }
     }
 }
