@@ -48,7 +48,7 @@ namespace ArrayListHome
 
             for (int i = 0; i < naturalNumbers.Count; i++)
             {
-                if (naturalNumbers.Contains(naturalNumbers[i]))
+                if (!naturalNumbers1.Contains(naturalNumbers[i]))
                 {
                     naturalNumbers1.Add(naturalNumbers[i]);
                 }
