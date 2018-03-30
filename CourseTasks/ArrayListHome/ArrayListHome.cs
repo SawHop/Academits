@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
-using System.Collections;
 
 namespace ArrayListHome
 {
@@ -28,6 +27,7 @@ namespace ArrayListHome
                 }
             }
             objReader.Close();
+            line.Clear();
 
             //Удалить из списка все четные числа
             List<int> numbers = new List<int>() { 4, 7, 2, 1, 9, 5, 4, 8, 2, 9 };
@@ -46,11 +46,11 @@ namespace ArrayListHome
             List<int> naturalNumbers = new List<int>() { 4, 7, 2, 1, 9, 5, 4, 8, 2, 9 };
             List<int> naturalNumbers1 = new List<int>();
 
-            for (int i = 0; i < naturalNumbers.Count; i++)
+            foreach (int e in naturalNumbers)
             {
-                if (!naturalNumbers1.Contains(naturalNumbers[i]))
+                if (!naturalNumbers1.Contains(e))
                 {
-                    naturalNumbers1.Add(naturalNumbers[i]);
+                    naturalNumbers1.Add(e);
                 }
             }
             Console.WriteLine("{ " + string.Join(", ", naturalNumbers1) + " }");

@@ -11,21 +11,19 @@ namespace Matrix
     {
         private Vector[] matrix;
 
-        public Matrix(int columns, int rows)
+        public Matrix(int rows, int colums)
         {
-            if (columns <= 0)
+            if (rows <= 0 || colums <= 0)
             {
                 throw new ArgumentException("Matrix dimension 0");
             }
-            else
-            {
-                Vector[] matrix1 = new Vector[rows];
+            matrix = new Vector[rows];
 
-                for (int i = 0; i < matrix1.Length; i++)
-                {
-                    matrix1[i] = new Vector(columns);
-                }
+            for (int i = 0; i < matrix.Length; i++)
+            {
+                matrix[i] = new Vector(colums);
             }
+
         }
 
         public Matrix(Matrix ob)
@@ -45,23 +43,21 @@ namespace Matrix
             {
                 throw new ArgumentException("Matrix dimension 0");
             }
-            else
+
+            int rows = matrix1.GetLength(0);
+            int colums = matrix1.GetLength(1);
+
+            matrix = new Vector[rows];
+
+            for (int i = 0; i < rows; i++)
             {
-                int colums = matrix1.GetLength(0);
-                int rows = matrix1.GetLength(1);
+                double[] array = new double[colums];
 
-                matrix = new Vector[colums];
-
-                for (int i = 0; i < colums; i++)
+                for (int j = 0; j < colums; j++)
                 {
-                    double[] array = new double[rows];
-
-                    for (int j = 0; j < rows; j++)
-                    {
-                        array[j] = matrix1[i, j];
-                    }
-                    matrix[i] = new Vector(array);
+                    array[j] = matrix1[i, j];
                 }
+                matrix[i] = new Vector(array);
             }
         }
 
@@ -71,49 +67,60 @@ namespace Matrix
             {
                 throw new ArgumentException("Matrix dimension 0");
             }
-            else
-            {
-                int count = 0;
-                foreach (Vector e in matrix1)
-                {
-                    count++;
-                    matrix = new Vector[count];
-                }
 
-                for (int i = 0; i < matrix1.Length; i++)
-                {
-                    matrix[i] = matrix1[i];
-                }
+            int count = 0;
+            foreach (Vector e in matrix1)
+            {
+                count++;
+                matrix = new Vector[count];
+            }
+
+            for (int i = 0; i < matrix1.Length; i++)
+            {
+                matrix[i] = matrix1[i];
             }
         }
 
         //Получение длины столбца
-        public double GetColums()
+        public int GetColums()
         {
             return matrix.Length;
         }
 
         //Получение длины строки
-        public double GetRows()
+        public int GetRow()
         {
-            return matrix[0].GetSize();
+            return (int)matrix[0].GetSize();
         }
 
         //Получение вектора строки по индексу
-        public Vector GetVectorRows(int index)
+        public Vector GetRow(int index)
         {
+            if (index < 0)
+            {
+                throw new ArgumentException("Index beyound vector boundary");
+            }
             return new Vector(matrix[index]);
         }
 
         //Задание вектора по индексу
-        public void SetVectorRows(int index, double[] array)
+        public void SetRow(int index, Vector vector)
         {
-            matrix[index] = new Vector(array);
+            if (index <= 0 || vector.GetSize() <= 0)
+            {
+                throw new ArgumentException("Index beyound vector boundary or vector length <= 0");
+            }
+            matrix[index] = new Vector(vector);
         }
 
         //Получение столбца по индексу
         public Vector GetVectorColums(int index)
         {
+            if (index < 0)
+            {
+                throw new ArgumentException("Index beyound vector boundary");
+            }
+
             double[] array = new double[matrix.Length];
 
             for (int i = 0; i < matrix.Length; i++)
@@ -124,26 +131,36 @@ namespace Matrix
         }
 
         //Умножение матрицы на скаляр
-        public Vector[] GetMultipliedByScalar(double scalar)
+        public void GetMultipliedByScalar(double scalar)
         {
             foreach (Vector e in matrix)
             {
                 e.GetMultipliedByScalar(scalar);
             }
-            return matrix;
+
+            Console.Write("Matrix multiplied by scalar=");
+            foreach (Vector e in matrix)
+            {
+                Console.Write(e);
+            }
         }
 
         //Транспонирование матрицы
-        public Vector[] GetTranspose()
+        public void GetTranspose()
         {
-            double rows = (int)GetRows();
-            Vector[] matrix1 = new Vector[(int)rows];
+            Vector[] matrix1 = new Vector[GetRow()];
 
-            for (int i = 0; i < rows; i++)
+            for (int i = 0; i < GetRow(); i++)
             {
                 matrix1[i] = GetVectorColums(i);
             }
-            return matrix1;
+            matrix = matrix1;
+
+            Console.Write("Transposed matrix=");
+            foreach (var e in matrix)
+            {
+                Console.Write(e);
+            }
         }
 
         //Получение определителя
@@ -167,37 +184,35 @@ namespace Matrix
         }
 
         //Умножение матрицы на вектор
-        public double GetMultiplied(Vector vector)
+        public Vector GetMultiplied(Vector vector)
         {
-
-            if (vector.GetSize() != GetRows())
+            if (vector.GetSize() != GetRow())
             {
                 throw new ArgumentException("Multiplied by vector can't calculated");
             }
 
             double result = 0;
-            int rows = (int)GetRows();
-            Vector vectro1 = new Vector(rows);
-            for (int i = 0; i < rows; ++i)
+            Vector vector1 = new Vector(GetColums());
+            for (int i = 0; i < GetColums(); ++i)
             {
-                result += Vector.GetVectorMultipliedByAnotherVector(matrix[i], vector);
+                result = Vector.GetVectorMultipliedByAnotherVector(matrix[i], vector);
+                vector1.SetComponent(i, result);
             }
-            return result;
+            return vector1;
         }
 
         //Сложение матриц
         public Vector[] GetAddition(Matrix matrix1)
         {
-            if (GetRows() != matrix1.GetRows() && GetColums() != matrix1.GetColums())
+            if (GetRow() != matrix1.GetRow() || GetColums() != matrix1.GetColums())
             {
                 throw new ArgumentException("Can't calculated matrixs");
             }
 
-            int rows = (int)GetRows();
-            Vector vectro1 = new Vector(rows);
-            for (int i = 0; i < rows; ++i)
+            Vector vectro1 = new Vector(GetRow());
+            for (int i = 0; i < GetRow(); ++i)
             {
-                matrix[i].GetAddition(matrix1.GetVectorRows(i));
+                matrix[i].GetAddition(matrix1.GetRow(i));
             }
             return matrix;
         }
@@ -205,16 +220,15 @@ namespace Matrix
         //Вычитание матриц
         public Vector[] GetDifference(Matrix matrix1)
         {
-            if (GetRows() != matrix1.GetRows() && GetColums() != matrix1.GetColums())
+            if (GetRow() != matrix1.GetRow() || GetColums() != matrix1.GetColums())
             {
                 throw new ArgumentException("Can't calculated matrixs");
             }
 
-            int rows = (int)GetRows();
-            Vector vectro1 = new Vector(rows);
-            for (int i = 0; i < rows; ++i)
+            Vector vectro1 = new Vector(GetRow());
+            for (int i = 0; i < GetRow(); ++i)
             {
-                matrix[i].GetDifference(matrix1.GetVectorRows(i));
+                matrix[i].GetDifference(matrix1.GetRow(i));
             }
             return matrix;
         }
@@ -222,7 +236,7 @@ namespace Matrix
         //Статическое сложение матриц
         public static Vector[] GetAdditionMatrix(Matrix matrix1, Matrix matrix2)
         {
-            if (matrix2.GetRows() != matrix1.GetRows() && matrix2.GetColums() != matrix1.GetColums())
+            if (matrix2.GetRow() != matrix1.GetRow() || matrix2.GetColums() != matrix1.GetColums())
             {
                 throw new ArgumentException("Can't calculated matrixs");
             }
@@ -234,7 +248,7 @@ namespace Matrix
         //Статическое вычитание матриц
         public static Vector[] GetDifferenceMatrix(Matrix matrix1, Matrix matrix2)
         {
-            if (matrix2.GetRows() != matrix1.GetRows() && matrix2.GetColums() != matrix1.GetColums())
+            if (matrix2.GetRow() != matrix1.GetRow() || matrix2.GetColums() != matrix1.GetColums())
             {
                 throw new ArgumentException("Can't calculated matrixs");
             }
@@ -244,21 +258,20 @@ namespace Matrix
         }
 
         //Статическая функция умножения матриц
-        public static double GetMultipliedMatrix(Matrix matrix1, Matrix matrix2)
+        public static Matrix GetMultipliedMatrix(Matrix matrix1, Matrix matrix2)
         {
-            if (matrix2.GetRows() != matrix1.GetRows() && matrix2.GetColums() != matrix1.GetColums())
+            if (matrix2.GetRow() != matrix1.GetRow() || matrix2.GetColums() != matrix1.GetColums())
             {
                 throw new ArgumentException("Can't calculated matrixs");
             }
+            Matrix result = new Matrix(matrix1);
 
-            double result = 0;
-            int rows = (int)matrix1.GetRows();
 
-            for (int i = 0; i < rows; ++i)
+            for (int i = 0; i < matrix1.GetRow(); ++i)
             {
-                result += matrix1.GetMultiplied(matrix2.GetVectorRows(i));
+               // result.GetRow(i) = matrix1.GetMultiplied(matrix2.GetRow(i));
             }
-            return result;
+            return matrix1;
         }
     }
 }
