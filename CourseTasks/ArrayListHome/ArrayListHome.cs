@@ -12,22 +12,22 @@ namespace ArrayListHome
         static void Main(string[] args)
         {
             // Прочитать все строки из файла
-            StreamReader objReader = new StreamReader("C:\\Users\\SawHo\\Desktop\\Задание.csv");
-            string sLine = "";
-
-            List<string> line = new List<string>();
-
-            while (sLine != null)
+            using (StreamReader objReader = new StreamReader("C:\\Users\\SawHo\\Desktop\\Задание.csv"))
             {
-                sLine = objReader.ReadLine();
+                string sLine = "";
 
-                if (sLine != null)
+                List<string> lineInTextDocument = new List<string>();
+
+                while (sLine != null)
                 {
-                    line.Add(sLine);
+                    sLine = objReader.ReadLine();
+
+                    if (sLine != null)
+                    {
+                        lineInTextDocument.Add(sLine);
+                    }
                 }
             }
-            objReader.Close();
-            line.Clear();
 
             //Удалить из списка все четные числа
             List<int> numbers = new List<int>() { 4, 7, 2, 1, 9, 5, 4, 8, 2, 9 };

@@ -63,7 +63,7 @@ namespace Vectors
             }
         }
 
-        public double GetSize()
+        public int GetSize()
         {
             return vector.Length;
         }
