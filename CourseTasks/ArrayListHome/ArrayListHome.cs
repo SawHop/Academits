@@ -16,7 +16,7 @@ namespace ArrayListHome
             {
                 string sLine = "";
 
-                List<string> lineInTextDocument = new List<string>();
+                List<string> linesList = new List<string>();
 
                 while (sLine != null)
                 {
@@ -24,7 +24,7 @@ namespace ArrayListHome
 
                     if (sLine != null)
                     {
-                        lineInTextDocument.Add(sLine);
+                        linesList.Add(sLine);
                     }
                 }
             }

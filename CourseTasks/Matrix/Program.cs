@@ -36,8 +36,8 @@ namespace Matrix
             }
             Matrix matrix3 = new Matrix(vector1);
 
-            Console.WriteLine("Colums=" + matrix2.GetColumns());
-            Console.WriteLine("Rows=" + matrix2.GetRow());
+            Console.WriteLine("Colums=" + matrix2.GetVerticalRow());
+            Console.WriteLine("Rows=" + matrix2.GetHorizontalRow());
             Console.WriteLine();
 
             Console.WriteLine(matrix2.GetRow(2));
@@ -46,7 +46,7 @@ namespace Matrix
             Vector vector4 = new Vector(array);
             matrix2.SetRow(2, vector4);
 
-            Console.WriteLine(matrix2.GetVectorColums(2));
+            Console.WriteLine(matrix2.GetVectorColumn(2));
 
             Console.WriteLine(matrix2);
             Console.WriteLine();
