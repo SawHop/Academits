@@ -95,12 +95,8 @@ namespace Matrix
             }
             Console.WriteLine("\n");
 
-            Console.Write("Static multiplied matrixs=");
-            foreach (var e in Matrix.GetMultipliedMatrix(matrix2, matrix5))
-            {
-                Console.Write(e);
-            }
-            Console.Read();
+            Console.WriteLine("Static multiplied matrixs=" + Matrix.GetMultipliedMatrix(matrix2, matrix5));
+
         }
     }
 }

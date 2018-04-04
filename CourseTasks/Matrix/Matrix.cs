@@ -140,12 +140,6 @@ namespace Matrix
             {
                 e.GetMultipliedByScalar(scalar);
             }
-
-            Console.Write("Matrix multiplied by scalar=");
-            foreach (Vector e in vectors)
-            {
-                Console.Write(e);
-            }
         }
 
         //Транспонирование матрицы
@@ -158,12 +152,6 @@ namespace Matrix
                 matrix1[i] = GetVectorColumn(i);
             }
             vectors = matrix1;
-
-            Console.Write("Transposed matrix=");
-            foreach (var e in vectors)
-            {
-                Console.Write(e);
-            }
         }
 
         private double GetComponent(int rowIndex, int columnIndex)
@@ -302,18 +290,17 @@ namespace Matrix
         }
 
         //Статическая функция умножения матриц
-        public static Vector[] GetMultipliedMatrix(Matrix matrix1, Matrix matrix2)
+        public static Matrix GetMultipliedMatrix(Matrix matrix1, Matrix matrix2)
         {
-            if (matrix2.GetHorizontalRow() != matrix1.GetHorizontalRow() || matrix2.GetVerticalRow() != matrix1.GetVerticalRow())
+            if (matrix2.GetHorizontalRow() != matrix1.GetVerticalRow() || matrix2.GetVerticalRow() != matrix1.GetHorizontalRow())
             {
                 throw new ArgumentException("Can't calculated matrixs");
             }
-            Vector[] result = new Vector[matrix1.GetHorizontalRow()];
-
+            Matrix result = new Matrix(matrix1.GetHorizontalRow(), matrix1.GetVerticalRow());
 
             for (int i = 0; i < matrix1.GetHorizontalRow(); ++i)
             {
-                result[i] = matrix1.GetMultiplied(matrix2.GetRow(i));
+                result.vectors[i] = matrix1.GetMultiplied(matrix2.vectors[i]);
             }
             return result;
         }
