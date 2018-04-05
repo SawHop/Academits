@@ -158,18 +158,18 @@ namespace Matrix
             rows = matrix1;
         }
 
-        private double GetComponent(int rowIndex, int columnIndex)
+        public double GetComponent(int rowIndex, int columnIndex)
         {
-            if ((rowIndex > GetQuantityColumns()) || (columnIndex > GetQuantityRows()))
+            if (rowIndex > GetQuantityColumns() || columnIndex > GetQuantityRows() || columnIndex < 0 || rowIndex < 0)
             {
                 throw new IndexOutOfRangeException("Index beyound vector boundary");
             }
             return rows[rowIndex].GetComponent(columnIndex);
         }
 
-        private void SetComponent(int rowIndex, int columnIndex, double number)
+        public void SetComponent(int rowIndex, int columnIndex, double number)
         {
-            if ((rowIndex > GetQuantityColumns()) || (columnIndex > GetQuantityRows()))
+            if (rowIndex > GetQuantityColumns() || columnIndex > GetQuantityRows() || columnIndex < 0 || rowIndex < 0)
             {
                 throw new IndexOutOfRangeException("Index beyound vector boundary");
             }
@@ -306,12 +306,13 @@ namespace Matrix
             }
 
             Matrix result = new Matrix(matrix1.GetQuantityColumns(), matrix1.GetQuantityRows());
-            //TODO  в проверку get rows
+            matrix1.GetTranspose();
 
             for (int i = 0; i < matrix1.GetQuantityColumns(); ++i)
             {
                 result.rows[i] = matrix2.GetMultiplied(matrix1.rows[i]);
             }
+            result.GetTranspose();
             return result;
         }
     }

@@ -31,7 +31,7 @@ namespace Matrix
                 double[] arrayOfVectors3 = { 7, 4, 2, 6 };
                 vector1[2] = new Vector(arrayOfVectors3);
 
-                double[] arrayOfVectors4 = { 11, 13, 17,9 };
+                double[] arrayOfVectors4 = { 11, 13, 17, 9 };
                 vector1[3] = new Vector(arrayOfVectors4);
             }
             Matrix matrix3 = new Matrix(vector1);
@@ -58,13 +58,7 @@ namespace Matrix
             matrix2.GetTranspose();
 
             Console.WriteLine("\n");
-            Vector[] vector6 = new Vector[1];
-            {
-                double[] arrayOfVectors6 = { 2 };
-                vector6[0] = new Vector(arrayOfVectors6);
-            }
-            Matrix matrix6 = new Matrix(vector6);
-            Console.WriteLine("Determinant=" + matrix6.GetDeterminant());
+            Console.WriteLine("Determinant=" + matrix2.GetDeterminant());
 
             Vector vector2 = new Vector(array);
             Console.Write("Multiplied matrix by vector=" + matrix2.GetMultiplied(vector2));
@@ -102,7 +96,7 @@ namespace Matrix
             Console.WriteLine("\n");
 
             Console.WriteLine("Static multiplied matrixs=" + Matrix.GetMultipliedMatrix(matrix2, matrix5));
-
+            Console.ReadLine();
         }
     }
 }
