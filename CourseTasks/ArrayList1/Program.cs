@@ -5,20 +5,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
 
-namespace ArraysList
+namespace ArrayList
 {
     class Program
     {
         static void Main(string[] args)
         {
             int[] array = new int[] { 2, 5, 7, 2, 12, 75 };
-            ArraysList<int> list = new ArraysList<int>(array);
+            ArrayList<int> list = new ArrayList<int>(array);
             Console.WriteLine("List before changes=" + list);
 
             list.Add(13);
             Console.WriteLine("Add element in beginig list=" + list);
 
-            list.Insert(3, 17);
+            list.Insert(10, 17);
             Console.WriteLine("Add element in list by index=" + list);
 
             list.RemoveAt(2);

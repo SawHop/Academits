@@ -11,9 +11,9 @@ namespace Matrix
     {
         static void Main(string[] args)
         {
-            int colums = 4;
+            int columns = 4;
             int rows = 3;
-            Matrix matrix = new Matrix(colums, rows);
+            Matrix matrix = new Matrix(columns, rows);
 
             double[,] vector = new double[,] { { 7, 12, 5 }, { 2, 37, 8 }, { 44, 5, 31 } };
             Matrix matrix2 = new Matrix(vector);
@@ -22,22 +22,22 @@ namespace Matrix
 
             Vector[] vector1 = new Vector[4];
             {
-                double[] arrayOfVectors1 = { 21, 17, 33, 3, 6, 9 };
+                double[] arrayOfVectors1 = { 1, 4, 2, 3 };
                 vector1[0] = new Vector(arrayOfVectors1);
 
-                double[] arrayOfVectors2 = { 2, 3, 5, 7, 9 };
+                double[] arrayOfVectors2 = { 5, 3, 2, 4 };
                 vector1[1] = new Vector(arrayOfVectors2);
 
-                double[] arrayOfVectors3 = { 6, 3, 15, 67, 23, 21, 88 };
+                double[] arrayOfVectors3 = { 7, 4, 2, 6 };
                 vector1[2] = new Vector(arrayOfVectors3);
 
-                double[] arrayOfVectors4 = { 7, 23, 21, 88, 33, 41, 2, 3 };
+                double[] arrayOfVectors4 = { 11, 13, 17,9 };
                 vector1[3] = new Vector(arrayOfVectors4);
             }
             Matrix matrix3 = new Matrix(vector1);
 
-            Console.WriteLine("Colums=" + matrix2.GetVerticalRow());
-            Console.WriteLine("Rows=" + matrix2.GetHorizontalRow());
+            Console.WriteLine("Colums=" + matrix2.GetQuantityRows());
+            Console.WriteLine("Rows=" + matrix2.GetQuantityColumns());
             Console.WriteLine();
 
             Console.WriteLine(matrix2.GetRow(2));
@@ -58,7 +58,13 @@ namespace Matrix
             matrix2.GetTranspose();
 
             Console.WriteLine("\n");
-            Console.WriteLine("Determinant=" + matrix2.GetDeterminant());
+            Vector[] vector6 = new Vector[1];
+            {
+                double[] arrayOfVectors6 = { 2 };
+                vector6[0] = new Vector(arrayOfVectors6);
+            }
+            Matrix matrix6 = new Matrix(vector6);
+            Console.WriteLine("Determinant=" + matrix6.GetDeterminant());
 
             Vector vector2 = new Vector(array);
             Console.Write("Multiplied matrix by vector=" + matrix2.GetMultiplied(vector2));

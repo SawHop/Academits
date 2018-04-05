@@ -17,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArrayListHome", "ArrayListH
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "List", "List\List.csproj", "{9D8BA11C-E38F-4DA7-A99B-5599B6967487}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArraysList", "ArrayList1\ArraysList.csproj", "{EA33CDC2-1E06-462A-B6C0-ABE10A4D2721}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArrayList", "ArrayList1\ArrayList.csproj", "{EA33CDC2-1E06-462A-B6C0-ABE10A4D2721}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
