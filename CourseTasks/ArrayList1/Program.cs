@@ -13,24 +13,69 @@ namespace ArrayList
         {
             int[] array = new int[] { 2, 5, 7, 2, 12, 75 };
             ArrayList<int> list = new ArrayList<int>(array);
-            Console.WriteLine("List before changes=" + list);
+
+            Console.Write("List before changes={ ");
+            foreach (int element in list)
+            {
+                Console.Write(element + " ");
+            }
+            Console.Write(" }");
+            Console.WriteLine();
+
 
             list.Add(13);
-            Console.WriteLine("Add element in beginig list=" + list);
+            Console.Write("Add element in beginig list={ ");
 
-            list.Insert(10, 17);
-            Console.WriteLine("Add element in list by index=" + list);
+            foreach (int element in list)
+            {
+                Console.Write(element + " ");
+            }
+            Console.Write(" }");
+            Console.WriteLine();
 
-            list.RemoveAt(2);
-            Console.WriteLine("Remove element in list by index=" + list);
+            list.Insert(7, 17);
+            Console.Write("Add element in list by index={ ");
 
-            int[] arrayTest = new int[] { 5, 9, 1, 5, 2 };
-            list.CopyTo(arrayTest, 2);
+            foreach (int element in list)
+            {
+                Console.Write(element + " ");
+            }
+            Console.Write(" }");
+            Console.WriteLine();
+
+            list.RemoveAt(5);
+            Console.Write("Remove element in list by index={ ");
+
+            foreach (int element in list)
+            {
+                Console.Write(element + " ");
+            }
+            Console.Write(" }");
+            Console.WriteLine();
+
+
+            int[] arrayTest = new int[] { 5, 9, 1, 5, 2, 9, 10, 41 };
+            list.CopyTo(arrayTest, 5);
 
             list.Remove(2);
-            Console.WriteLine("Remove element in list" + list);
+            Console.Write("Remove element in list={ ");
+
+            foreach (int element in list)
+            {
+                Console.Write(element + " ");
+            }
+            Console.Write(" }");
+            Console.WriteLine();
 
             list.Clear();
+            Console.Write("Clear list={ ");
+
+            foreach (int element in list)
+            {
+                Console.Write(element + " ");
+            }
+            Console.Write(" }");
+
             Console.ReadLine();
         }
     }

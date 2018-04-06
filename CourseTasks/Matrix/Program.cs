@@ -36,8 +36,8 @@ namespace Matrix
             }
             Matrix matrix3 = new Matrix(vector1);
 
-            Console.WriteLine("Colums=" + matrix2.GetQuantityRows());
-            Console.WriteLine("Rows=" + matrix2.GetQuantityColumns());
+            Console.WriteLine("Colums=" + matrix2.GetRowsCount());
+            Console.WriteLine("Rows=" + matrix2.GetColumnsCount());
             Console.WriteLine();
 
             Console.WriteLine(matrix2.GetRow(2));

@@ -11,7 +11,6 @@ namespace ArrayList
     {
         private T[] arrayList;
         private int length = 0;
-        private int capacity;
 
         public ArrayList(T[] arrayList)
         {
@@ -24,9 +23,9 @@ namespace ArrayList
             arrayList = new T[length];
         }
 
-        public ArrayList(int lengthInArray)
+        public ArrayList(int capacity)
         {
-            arrayList = new T[lengthInArray];
+            arrayList = new T[capacity];
         }
 
         public int Count
@@ -35,14 +34,16 @@ namespace ArrayList
             {
                 return arrayList.Length;
             }
-            set
+        }
+
+        private void SetCount(int value)
+        {
+            if (value < 0)
             {
-                if (Count < value)
-                {
-                    throw new OverflowException("Count element in list < your numbers");
-                }
-                Count = value;
+                throw new OverflowException("Count element in list < your numbers");
             }
+            arrayList = new T[Count];
+            length = value;
         }
 
         public bool IsReadOnly => false;
@@ -71,7 +72,7 @@ namespace ArrayList
 
         public int IndexOf(T item)
         {
-            for (int i = 0; i < arrayList.Length; i++)
+            for (int i = 0; i < length; i++)
             {
                 if (Equals(arrayList[i], item))
                 {
@@ -85,26 +86,28 @@ namespace ArrayList
         {
             get
             {
-                return capacity;
+                return Count;
             }
             set
             {
-                if (value < 0 )
+                if (value < Count)
                 {
-                    throw new ArgumentOutOfRangeException("Value can't lees then 0");
+                    throw new ArgumentOutOfRangeException("Value can't lees then Count");
                 }
 
-                capacity = value;
+                T[] old = arrayList;
+                arrayList = new T[value];
+                Array.Copy(old, arrayList, length);
             }
         }
 
         public void TrimToSize()
         {
-            if (Count > arrayList.Length)
+            if (Capacity != Count)
             {
                 T[] old = arrayList;
-                arrayList = new T[old.Length];
-                Array.Copy(old, 0, arrayList, 0, old.Length);
+                arrayList = new T[length];
+                Array.Copy(old, 0, arrayList, 0, length);
             }
 
         }
@@ -118,7 +121,7 @@ namespace ArrayList
 
         public void Insert(int index, T item)
         {
-            if (index < 0 || index >= Count)
+            if (index < 0 || index >= length + 1)
             {
                 throw new IndexOutOfRangeException("Index out of range");
             }
@@ -142,11 +145,13 @@ namespace ArrayList
                 throw new IndexOutOfRangeException("Index out of range");
             }
 
-            T[] old = arrayList;
-            arrayList = new T[Count - 1];
-
-            Array.Copy(old, 0, arrayList, 0, index);
-            Array.Copy(old, index + 1, arrayList, index, Count - index - 1);
+            for (int i = 0; i < arrayList.Length - 1; i++)
+            {
+                if (i >= index)
+                {
+                    arrayList[i] = arrayList[i + 1];
+                }
+            }
 
             length--;
         }
@@ -158,14 +163,13 @@ namespace ArrayList
                 IncreaseCapacity();
             }
 
-            Array.Copy(arrayList, 0, arrayList, 1, length);
-            arrayList[0] = item;
+            arrayList[length] = item;
             length++;
         }
 
         public void Clear()
         {
-            Array.Clear(arrayList, 0, length);
+            SetCount(0);
         }
 
         public bool Contains(T item)
@@ -175,9 +179,9 @@ namespace ArrayList
                 throw new ArgumentNullException("Item is null");
             }
 
-            foreach (T element in arrayList)
+            for (int i = 0; i < length; i++)
             {
-                if (Equals(item, element))
+                if (IndexOf(item) == i)
                 {
                     return true;
                 }
@@ -191,57 +195,45 @@ namespace ArrayList
             {
                 throw new ArgumentNullException("Array is null");
             }
+            int x = length;
 
-            if (array.Length <= 0)
+            if (array.Length <= 0 || index >= length || index < 0)
             {
                 throw new IndexOutOfRangeException("Index out of range");
             }
 
-            if (Count > array.Length)
+            if (length - index > array.Length - index)
             {
-                T[] old = array;
-                array = new T[Count];
-                Array.Copy(old, 0, array, 0, old.Length - 1);
+                throw new ArgumentException("Index out of range");
             }
 
-            for (int i = index; i < arrayList.Length; i++)
+            for (int i = index; i < length; i++)
             {
                 array[i] = arrayList[i];
             }
-            Console.WriteLine("Copy elemnets of list in array=" + ("{ " + string.Join(", ", array) + " }"));
         }
 
         public bool Remove(T item)
         {
-            int startLengthArray = length;
-            RemoveAt(IndexOf(item));
-
-            if (startLengthArray != length)
+            if (IndexOf(item) != -1)
             {
+                RemoveAt(IndexOf(item));
                 return true;
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
         public IEnumerator<T> GetEnumerator()
         {
-            foreach (T element in arrayList)
+            for (int i = 0; i < length; i++)
             {
-                yield return element;
+                yield return arrayList[i];
             }
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
-        }
-
-        public override string ToString()
-        {
-            return "{ " + string.Join(", ", arrayList) + " }";
         }
     }
 }
