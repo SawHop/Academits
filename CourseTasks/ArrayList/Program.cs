@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Collections;
 
 namespace ArrayList
 {
@@ -22,18 +21,7 @@ namespace ArrayList
             Console.Write(" }");
             Console.WriteLine();
 
-
-            list.Add(13);
-            Console.Write("Add element in beginig list={ ");
-
-            foreach (int element in list)
-            {
-                Console.Write(element + " ");
-            }
-            Console.Write(" }");
-            Console.WriteLine();
-
-            list.Insert(7, 17);
+            list.Insert(6, 33);
             Console.Write("Add element in list by index={ ");
 
             foreach (int element in list)
@@ -43,7 +31,17 @@ namespace ArrayList
             Console.Write(" }");
             Console.WriteLine();
 
-            list.RemoveAt(5);
+            list.Add(13);
+            Console.Write("Add element in end list={ ");
+
+            foreach (int element in list)
+            {
+                Console.Write(element + " ");
+            }
+            Console.Write(" }");
+            Console.WriteLine();
+
+            list.RemoveAt(7);
             Console.Write("Remove element in list by index={ ");
 
             foreach (int element in list)

@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EA33CDC2-1E06-462A-B6C0-ABE10A4D2721}</ProjectGuid>
+    <ProjectGuid>{A974BF6E-A5C6-4A10-B0A5-6E0F8DA8A757}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>ArrayList1</RootNamespace>
-    <AssemblyName>ArrayList1</AssemblyName>
+    <RootNamespace>ArrayList</RootNamespace>
+    <AssemblyName>ArrayList</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -42,7 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArraysList.cs" />
+    <Compile Include="ArrayList.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
