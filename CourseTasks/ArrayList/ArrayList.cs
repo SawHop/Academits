@@ -13,17 +13,28 @@ namespace ArrayList
 
         public ArrayList(T[] array)
         {
-            this.array = array;
+            if (array.Length < 0)
+            {
+                throw new ArgumentException("Need array length more then 0");
+            }
+            Count = array.Length;
+
+            T[] copyArray = new T[array.Length];
+            Array.Copy(array, copyArray, array.Length);
+
+            this.array = copyArray;
         }
 
         public ArrayList()
         {
-
+            array = new T[10];
+            Count = 10;
         }
 
         public ArrayList(int capacity)
         {
             array = new T[capacity];
+            Count = capacity;
         }
 
         public int Count
@@ -76,14 +87,12 @@ namespace ArrayList
             }
             set
             {
-                if (Capacity < Count)
+                if (value > Count)
                 {
                     throw new ArgumentOutOfRangeException("Value can't lees then Count");
                 }
 
-                T[] old = array;
-                array = new T[value];
-                Array.Copy(old, array, Count);
+                Array.Resize(ref array, Count);
             }
         }
 
@@ -98,7 +107,6 @@ namespace ArrayList
 
         private void IncreaseCapacity()
         {
-            Count = array.Length;
             Array.Resize(ref array, array.Length * 2);
         }
 
@@ -109,12 +117,12 @@ namespace ArrayList
                 throw new IndexOutOfRangeException("Index out of range");
             }
 
-            if (index > Count)
+            if (Count >= Capacity)
             {
                 IncreaseCapacity();
             }
 
-            Array.Copy(array, index, array, index + 1, Capacity - index - 1);
+            Array.Copy(array, index, array, index + 1, Count - index);
             array[index] = item;
             Count++;
         }
@@ -126,7 +134,7 @@ namespace ArrayList
                 throw new IndexOutOfRangeException("Index out of range");
             }
 
-            Array.Copy(array, index + 1, array, index, Count - index);
+            Array.Copy(array, index + 1, array, index, Count - index - 1);
             Count--;
         }
 
@@ -148,11 +156,7 @@ namespace ArrayList
 
         public bool Contains(T item)
         {
-            if (IndexOf(item) == -1)
-            {
-                return false;
-            }
-            return true;
+            return IndexOf(item) != -1;
         }
 
         public void CopyTo(T[] array, int index)
@@ -161,21 +165,15 @@ namespace ArrayList
             {
                 throw new ArgumentNullException("Array is null");
             }
-            int x = Count;
 
-            if (array.Length < 0 || Count < 0 || index < 0)
+            if (index < 0 || index > array.Length)
             {
                 throw new IndexOutOfRangeException("Index out of range");
             }
 
-            if (index >= Count || Count - index > array.Length - index)
+            for (int i = index, j = 0; j < Count; i++, j++)
             {
-                throw new ArgumentException("Index out of range");
-            }
-
-            for (int i = index; i <= Count; i++)
-            {
-                array[i] = this.array[i];
+                array[i] = this.array[j];
             }
         }
 
@@ -192,14 +190,18 @@ namespace ArrayList
 
         public IEnumerator<T> GetEnumerator()
         {
-            int CountBeforeEnumerator = Count;
+            T[] copyArray = new T[Count];
+            Array.Copy(array, 0, copyArray, 0, Count);
+
             for (int i = 0; i < Count; i++)
             {
-                yield return array[i];
-
-                if(Count!=CountBeforeEnumerator)
+                if (Equals(array[i], copyArray[i]))
                 {
-                    throw new NotImplementedException("Count changed in Enumerator");
+                    yield return array[i];
+                }
+                else
+                {
+                    throw new NotImplementedException("Array had changed in Enumerator");
                 }
             }
         }

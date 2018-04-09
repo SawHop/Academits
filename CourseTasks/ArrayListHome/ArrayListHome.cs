@@ -30,8 +30,8 @@ namespace ArrayListHome
             }
 
             //Удалить из списка все четные числа
-            List<int> numbers = new List<int>() { 4, 7, 2, 1, 9, 5, 4, 8, 2, 9 };
-            numbers.Insert(11,33);
+            List<int> numbers = new List<int>() { 2, 5, 7, 8, 32, 2, };
+          
             for (int i = 0; i < numbers.Count; i++)
             {
                 if (numbers[i] % 2 == 0)

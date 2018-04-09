@@ -21,7 +21,7 @@ namespace ArrayList
             Console.Write(" }");
             Console.WriteLine();
 
-            list.Insert(6, 33);
+            list.Insert(4, 33);
             Console.Write("Add element in list by index={ ");
 
             foreach (int element in list)
@@ -30,6 +30,8 @@ namespace ArrayList
             }
             Console.Write(" }");
             Console.WriteLine();
+
+            list.GetEnumerator();
 
             list.Add(13);
             Console.Write("Add element in end list={ ");
@@ -52,8 +54,8 @@ namespace ArrayList
             Console.WriteLine();
 
 
-            int[] arrayTest = new int[] { 5, 9, 1, 5, 2, 9, 10, 41 };
-            list.CopyTo(arrayTest, 5);
+            int[] arrayTest = new int[] { 5, 9, 1, 5, 2, 9, 10, 41, 8 };
+            list.CopyTo(arrayTest, 2);
 
             list.Remove(2);
             Console.Write("Remove element in list={ ");
