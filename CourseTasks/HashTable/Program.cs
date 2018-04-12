@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,14 +11,17 @@ namespace HashTable
     {
         static void Main(string[] args)
         {
-            List<int> list = new List<int>();
-            list.Add(5);
-            list.Add(13);
-            list.Add(9);
-            list.Add(23);
-            list.Add(51);
-            list.Add(18);
+            HashTable<int> hashTable = new HashTable<int>() { 12, 6, 8, 13, 9 };
+            hashTable.Add(31);
+            hashTable.Add(71);
+            hashTable.Add(17);
+            hashTable.Add(3);
+            hashTable.Add(7);
+            hashTable.Add(11);
 
+           Console.WriteLine(hashTable.Contains(7));
+
+            hashTable.Clear();
         }
     }
 }

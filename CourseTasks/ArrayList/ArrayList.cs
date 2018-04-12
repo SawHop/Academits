@@ -13,7 +13,7 @@ namespace ArrayList
 
         public ArrayList(T[] array)
         {
-            if (array.Length < 0)
+            if (array.Length <= 0)
             {
                 throw new ArgumentException("Need array length more then 0");
             }
@@ -28,13 +28,11 @@ namespace ArrayList
         public ArrayList()
         {
             array = new T[10];
-            Count = 10;
         }
 
         public ArrayList(int capacity)
         {
             array = new T[capacity];
-            Count = capacity;
         }
 
         public int Count
@@ -87,7 +85,7 @@ namespace ArrayList
             }
             set
             {
-                if (value > Count)
+                if (value < Count)
                 {
                     throw new ArgumentOutOfRangeException("Value can't lees then Count");
                 }
@@ -166,9 +164,14 @@ namespace ArrayList
                 throw new ArgumentNullException("Array is null");
             }
 
-            if (index < 0 || index > array.Length)
+            if (index < 0 || index >= array.Length)
             {
                 throw new IndexOutOfRangeException("Index out of range");
+            }
+
+            if (Count > array.Length - index)
+            {
+                throw new ArgumentException("The number of elements in the source this.array is greater than the available space from Index to the end of the destination array");
             }
 
             for (int i = index, j = 0; j < Count; i++, j++)
@@ -190,19 +193,16 @@ namespace ArrayList
 
         public IEnumerator<T> GetEnumerator()
         {
-            T[] copyArray = new T[Count];
-            Array.Copy(array, 0, copyArray, 0, Count);
-
+            int modCount = Count;
+            
             for (int i = 0; i < Count; i++)
             {
-                if (Equals(array[i], copyArray[i]))
+                if (Count != modCount)
                 {
-                    yield return array[i];
+                    throw new InvalidOperationException("Array had changed in Enumerator");
                 }
-                else
-                {
-                    throw new NotImplementedException("Array had changed in Enumerator");
-                }
+
+                yield return array[i];
             }
         }
 

@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A0D25B58-C649-4A93-9374-7C93C9FA3A37}</ProjectGuid>
+    <ProjectGuid>{27D1F2E5-9EBA-4DF9-83CB-E7DAC5114444}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>HashTable</RootNamespace>
     <AssemblyName>HashTable</AssemblyName>
@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HashTable.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
