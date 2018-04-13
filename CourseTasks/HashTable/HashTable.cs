@@ -10,20 +10,7 @@ namespace HashTable
     class HashTable<T> : ICollection<T>
     {
         private List<T>[] array;
-
-        public HashTable(T[] array)
-        {
-            if (array.Length <= 0)
-            {
-                throw new ArgumentException("Need array length more then 0");
-            }
-            Count = array.Length;
-
-            List<T>[] copyArray = new List<T>[array.Length];
-            Array.Copy(array, copyArray, array.Length);
-
-            this.array = copyArray;
-        }
+        private int modCount;
 
         public HashTable()
         {
@@ -43,28 +30,34 @@ namespace HashTable
 
         public bool IsReadOnly => false;
 
-        public int GetIndex(object obj)
+        private int GetIndex(object obj)
         {
             return Math.Abs(obj.GetHashCode() % array.Length);
         }
 
         public void Add(T item)
         {
-            if (item == null)
+            int index = GetIndex(item);
+            if (array[index] == null)
             {
-                throw new ArgumentNullException("Item is null");
+                array[index] = new List<T>() { item };
             }
 
-            if (array[GetIndex(item)] == null)
-            {
-                array[GetIndex(item)] = new List<T>();
-            }
             Count++;
+            modCount++;
         }
 
         public void Clear()
         {
+            int counter = 0;
+            foreach (List<T> element in array)
+            {
+                array[counter] = null;
+                counter++;
+            }
+
             Count = 0;
+            modCount++;
         }
 
         public bool Contains(T item)
@@ -74,11 +67,6 @@ namespace HashTable
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            if (array == null)
-            {
-                throw new ArgumentNullException("Array is null");
-            }
-
             if (arrayIndex < 0 || arrayIndex >= array.Length)
             {
                 throw new IndexOutOfRangeException("Index out of range");
@@ -100,21 +88,30 @@ namespace HashTable
         {
             int modCount = Count;
 
-            foreach (T element in this)
+            foreach (List<T> element in array)
             {
-                if (Count != modCount)
+                if (element == null)
                 {
-                    throw new InvalidOperationException("Array had changed in Enumerator");
+                    continue;
                 }
 
-                yield return element;
+                foreach (T array in element)
+                {
+                    if (Count != modCount)
+                    {
+                        throw new InvalidOperationException("Array had changed in Enumerator");
+                    }
+
+                    yield return array;
+                }
             }
         }
 
         public bool Remove(T item)
         {
             int index = GetIndex(item);
-            if (array[GetIndex(item)] != null)
+
+            if (array[index] != null)
             {
                 array[index].Remove(item);
                 return true;

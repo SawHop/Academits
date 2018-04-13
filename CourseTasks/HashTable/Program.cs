@@ -11,15 +11,24 @@ namespace HashTable
     {
         static void Main(string[] args)
         {
-            HashTable<int> hashTable = new HashTable<int>() { 12, 6, 8, 13, 9 };
+            HashTable<int> hashTable = new HashTable<int>();
             hashTable.Add(31);
-            hashTable.Add(71);
+            hashTable.Add(72);
             hashTable.Add(17);
             hashTable.Add(3);
-            hashTable.Add(7);
-            hashTable.Add(11);
+            hashTable.Add(8);
+            hashTable.Add(14);
 
-           Console.WriteLine(hashTable.Contains(7));
+            Console.Write("HashTable before changes={ ");
+            foreach (int element in hashTable)
+            {
+                Console.Write(element + " ");
+            }
+            Console.Write(" }");
+
+            Console.WriteLine();
+
+            Console.WriteLine(hashTable.Contains(7));
 
             hashTable.Clear();
         }

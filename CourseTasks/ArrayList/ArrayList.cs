@@ -10,13 +10,10 @@ namespace ArrayList
     class ArrayList<T> : IList<T>
     {
         private T[] array;
+        private int modCount;
 
         public ArrayList(T[] array)
         {
-            if (array.Length <= 0)
-            {
-                throw new ArgumentException("Need array length more then 0");
-            }
             Count = array.Length;
 
             T[] copyArray = new T[array.Length];
@@ -34,6 +31,7 @@ namespace ArrayList
         {
             array = new T[capacity];
         }
+
 
         public int Count
         {
@@ -123,6 +121,7 @@ namespace ArrayList
             Array.Copy(array, index, array, index + 1, Count - index);
             array[index] = item;
             Count++;
+            modCount++;
         }
 
         public void RemoveAt(int index)
@@ -134,6 +133,7 @@ namespace ArrayList
 
             Array.Copy(array, index + 1, array, index, Count - index - 1);
             Count--;
+            modCount++;
         }
 
         public void Add(T item)
@@ -145,11 +145,13 @@ namespace ArrayList
 
             array[Count] = item;
             Count++;
+            modCount++;
         }
 
         public void Clear()
         {
             Count = 0;
+            modCount++;
         }
 
         public bool Contains(T item)
@@ -193,8 +195,8 @@ namespace ArrayList
 
         public IEnumerator<T> GetEnumerator()
         {
-            int modCount = Count;
-            
+            modCount = Count;
+
             for (int i = 0; i < Count; i++)
             {
                 if (Count != modCount)
