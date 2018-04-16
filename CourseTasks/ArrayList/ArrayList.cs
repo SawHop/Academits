@@ -10,7 +10,7 @@ namespace ArrayList
     class ArrayList<T> : IList<T>
     {
         private T[] array;
-        private int modCount;
+        private int modChanges;
 
         public ArrayList(T[] array)
         {
@@ -121,7 +121,7 @@ namespace ArrayList
             Array.Copy(array, index, array, index + 1, Count - index);
             array[index] = item;
             Count++;
-            modCount++;
+            modChanges++;
         }
 
         public void RemoveAt(int index)
@@ -133,7 +133,7 @@ namespace ArrayList
 
             Array.Copy(array, index + 1, array, index, Count - index - 1);
             Count--;
-            modCount++;
+            modChanges++;
         }
 
         public void Add(T item)
@@ -145,13 +145,13 @@ namespace ArrayList
 
             array[Count] = item;
             Count++;
-            modCount++;
+            modChanges++;
         }
 
         public void Clear()
         {
             Count = 0;
-            modCount++;
+            modChanges++;
         }
 
         public bool Contains(T item)
@@ -195,11 +195,11 @@ namespace ArrayList
 
         public IEnumerator<T> GetEnumerator()
         {
-            modCount = Count;
+            int modCount = modChanges;
 
             for (int i = 0; i < Count; i++)
             {
-                if (Count != modCount)
+                if (modChanges != modCount)
                 {
                     throw new InvalidOperationException("Array had changed in Enumerator");
                 }

@@ -25,12 +25,14 @@ namespace HashTable
                 Console.Write(element + " ");
             }
             Console.Write(" }");
-
             Console.WriteLine();
 
-            Console.WriteLine(hashTable.Contains(7));
+            Console.WriteLine(hashTable.Contains(8));
+
+            hashTable.Remove(72);
 
             hashTable.Clear();
+
         }
     }
 }

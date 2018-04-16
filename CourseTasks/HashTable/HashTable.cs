@@ -10,7 +10,7 @@ namespace HashTable
     class HashTable<T> : ICollection<T>
     {
         private List<T>[] array;
-        private int modCount;
+        private int modChanges;
 
         public HashTable()
         {
@@ -38,18 +38,20 @@ namespace HashTable
         public void Add(T item)
         {
             int index = GetIndex(item);
+
             if (array[index] == null)
             {
                 array[index] = new List<T>() { item };
             }
 
             Count++;
-            modCount++;
+            modChanges++;
         }
 
         public void Clear()
         {
             int counter = 0;
+
             foreach (List<T> element in array)
             {
                 array[counter] = null;
@@ -57,12 +59,17 @@ namespace HashTable
             }
 
             Count = 0;
-            modCount++;
+            modChanges++;
         }
 
         public bool Contains(T item)
         {
-            return array[GetIndex(item)] != null;
+            if (item == null)
+            {
+                throw new ArgumentNullException("Item should not be null");
+            }
+
+            return array[GetIndex(item)].Contains(item);
         }
 
         public void CopyTo(T[] array, int arrayIndex)
@@ -86,7 +93,7 @@ namespace HashTable
 
         public IEnumerator<T> GetEnumerator()
         {
-            int modCount = Count;
+            int modCount = modChanges;
 
             foreach (List<T> element in array)
             {
@@ -97,7 +104,7 @@ namespace HashTable
 
                 foreach (T array in element)
                 {
-                    if (Count != modCount)
+                    if (modChanges != modCount)
                     {
                         throw new InvalidOperationException("Array had changed in Enumerator");
                     }
@@ -109,11 +116,18 @@ namespace HashTable
 
         public bool Remove(T item)
         {
-            int index = GetIndex(item);
+            if (item == null)
+            {
+                throw new ArgumentNullException("Item should not be null");
+            }
 
-            if (array[index] != null)
+            int index = GetIndex(item);
+            List<T> temp = new List<T> { item };
+    
+            if (array[index] == temp)
             {
                 array[index].Remove(item);
+                Count--;
                 return true;
             }
             return false;
