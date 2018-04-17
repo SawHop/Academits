@@ -54,7 +54,10 @@ namespace HashTable
 
             foreach (List<T> element in array)
             {
-                array[counter] = null;
+                if (element != null)
+                {
+                    array[counter] = null;
+                }
                 counter++;
             }
 
@@ -64,12 +67,7 @@ namespace HashTable
 
         public bool Contains(T item)
         {
-            if (item == null)
-            {
-                throw new ArgumentNullException("Item should not be null");
-            }
-
-            return array[GetIndex(item)].Contains(item);
+            return array[GetIndex(item)].Contains(item) && array[GetIndex(item)] != null;
         }
 
         public void CopyTo(T[] array, int arrayIndex)
@@ -102,35 +100,32 @@ namespace HashTable
                     continue;
                 }
 
-                foreach (T array in element)
+                foreach (T value in element)
                 {
                     if (modChanges != modCount)
                     {
                         throw new InvalidOperationException("Array had changed in Enumerator");
                     }
 
-                    yield return array;
+                    yield return value;
                 }
             }
         }
 
         public bool Remove(T item)
         {
-            if (item == null)
-            {
-                throw new ArgumentNullException("Item should not be null");
-            }
-
             int index = GetIndex(item);
-            List<T> temp = new List<T> { item };
-    
-            if (array[index] == temp)
+
+            if (array[index] == null)
+            {
+                return false;
+            }
+            else
             {
                 array[index].Remove(item);
                 Count--;
                 return true;
             }
-            return false;
         }
 
         IEnumerator IEnumerable.GetEnumerator()

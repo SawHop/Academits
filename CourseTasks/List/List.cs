@@ -9,94 +9,45 @@ namespace List
 {
     class List<T>
     {
-        private T[] arrayList;
-        private int length = 0;
+        private T data;
+        private List<T> next;
 
-        public List(T[] arrayList)
+        public List()
         {
-            this.arrayList = arrayList;
         }
 
-        public int GetSize()
+        public List(T data)
         {
-            return length = arrayList.Length;
+            this.data = data;
         }
 
-        public T GetFirstElement()
+        public List(T data, List<T> next)
         {
-            return arrayList[0];
+            this.data = data;
+            this.next = next;
         }
 
-        public T GetElement(int index)
+        public T getData()
         {
-            if (index < 0 || index >= length)
-            {
-                throw new IndexOutOfRangeException("Index out of range");
-            }
-
-            return arrayList[index];
+            return data;
         }
 
-        public T SetElement(int index, T value)
+        public void setData(T data)
         {
-            if (index < 0 || index >= length)
-            {
-                throw new IndexOutOfRangeException("Index out of range");
-            }
-
-            T element = arrayList[index];
-            arrayList[index] = value;
-
-            return element;
+            this.data = data;
         }
 
-        public void AddElementInBegin(T element)
+        public List<T> getNext()
         {
-            T[] old = arrayList;
-            arrayList = new T[old.Length + 1];
-
-            Array.Copy(old, 0, arrayList, 1, old.Length);
-            length++;
-
-            Console.Write("Element at beginning of list=" , arrayList[0] = element);
+            return next;
         }
 
-        public void AddElementByIndex(int index, T element)
+        public void setNext(List<T> next)
         {
-            if (index < 0 || index >= length)
-            {
-                throw new IndexOutOfRangeException("Index out of range");
-            }
-
-            T[] old = arrayList;
-            arrayList = new T[old.Length + 1];
-
-            Array.Copy(old, 0, arrayList, 0, length-index+1);
-            arrayList[index] = element;
-
-            Array.Copy(old, index, arrayList, index+1, length - index);
-            length++;
-
-            Console.WriteLine(arrayList[0] = element);
+            this.next = next;
         }
 
-        public void RemoveElementByIndex(int index)
-        {
-            if (index < 0 || index >= length)
-            {
-                throw new IndexOutOfRangeException("Index out of range");
-            }
-
-            T[] old = arrayList;
-            arrayList = new T[old.Length - 1];
-            T temp = old[index];
-
-            Array.Copy(old, index + 1, old, index, length - index - 1);
-            Array.Copy(old, 0, arrayList, 0, old.Length - 1);
-
-            --length;
-            Console.WriteLine("RemoveElementByIndex element=" + temp);
-        }
     }
 }
+
 

@@ -11,7 +11,7 @@ namespace HashTable
     {
         static void Main(string[] args)
         {
-            HashTable<int> hashTable = new HashTable<int>();
+            HashTable<int> hashTable = new HashTable<int>() {1,23,4,56 };
             hashTable.Add(31);
             hashTable.Add(72);
             hashTable.Add(17);
