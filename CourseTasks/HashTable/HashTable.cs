@@ -28,10 +28,20 @@ namespace HashTable
             private set;
         }
 
+        internal void Add(object p)
+        {
+            int index = Count + 1;
+            array[index] = new List<T>();
+        }
+
         public bool IsReadOnly => false;
 
         private int GetIndex(object obj)
         {
+            if (obj == null)
+            {
+                return Count + 1;
+            }
             return Math.Abs(obj.GetHashCode() % array.Length);
         }
 
@@ -50,16 +60,8 @@ namespace HashTable
 
         public void Clear()
         {
-            int counter = 0;
-
-            foreach (List<T> element in array)
-            {
-                if (element != null)
-                {
-                    array[counter] = null;
-                }
-                counter++;
-            }
+            int length = array.Length;
+            array = new List<T>[length];
 
             Count = 0;
             modChanges++;
@@ -67,7 +69,8 @@ namespace HashTable
 
         public bool Contains(T item)
         {
-            return array[GetIndex(item)].Contains(item) && array[GetIndex(item)] != null;
+            int index = GetIndex(item);
+            return array[index].Contains(item) && array[index] != null;
         }
 
         public void CopyTo(T[] array, int arrayIndex)
@@ -93,18 +96,18 @@ namespace HashTable
         {
             int modCount = modChanges;
 
-            foreach (List<T> element in array)
+            foreach (List<T> list in array)
             {
-                if (element == null)
+                if (list == null)
                 {
                     continue;
                 }
 
-                foreach (T value in element)
+                foreach (T value in list)
                 {
                     if (modChanges != modCount)
                     {
-                        throw new InvalidOperationException("Array had changed in Enumerator");
+                        throw new InvalidOperationException("Collection had changed");
                     }
 
                     yield return value;
@@ -116,15 +119,15 @@ namespace HashTable
         {
             int index = GetIndex(item);
 
-            if (array[index] == null)
-            {
-                return false;
-            }
-            else
+            if (array[index] != null)
             {
                 array[index].Remove(item);
                 Count--;
                 return true;
+            }
+            else
+            {
+                return false;
             }
         }
 
