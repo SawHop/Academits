@@ -17,7 +17,6 @@ namespace HashTable
             hashTable.Add(3);
             hashTable.Add(8);
             hashTable.Add(14);
-            hashTable.Add(null);
 
             Console.Write("HashTable before changes={ ");
             foreach (int element in hashTable)
@@ -27,12 +26,18 @@ namespace HashTable
             Console.Write(" }");
             Console.WriteLine();
 
-            Console.WriteLine(hashTable.Contains(8));
+            HashTable<double> hashTable1 = new HashTable<double>();
+            hashTable1.Add(2.3);
+            hashTable1.Add(23);
+            hashTable1.Add(7);
+            hashTable1.Add(6);
+            hashTable1.Add(2);
+            hashTable1.Add(1);
+            Console.WriteLine(hashTable1.Contains(6));
 
             hashTable.Remove(72);
 
             hashTable.Clear();
-
         }
     }
 }

@@ -28,19 +28,13 @@ namespace HashTable
             private set;
         }
 
-        internal void Add(object p)
-        {
-            int index = Count + 1;
-            array[index] = new List<T>();
-        }
-
         public bool IsReadOnly => false;
 
         private int GetIndex(object obj)
         {
             if (obj == null)
             {
-                return Count + 1;
+                return 0;
             }
             return Math.Abs(obj.GetHashCode() % array.Length);
         }
@@ -52,6 +46,10 @@ namespace HashTable
             if (array[index] == null)
             {
                 array[index] = new List<T>() { item };
+            }
+            else
+            {
+                array[index].Add(item);
             }
 
             Count++;
@@ -85,9 +83,12 @@ namespace HashTable
                 throw new ArgumentException("The number of elements in the source this.array is greater than the available space from Index to the end of the destination array");
             }
 
+            T[] copyArray = new T[array.Length];
+            Array.Copy(array, copyArray, array.Length);
+
             foreach (T element in this)
             {
-                array[arrayIndex] = element;
+                copyArray[arrayIndex] = element;
                 arrayIndex++;
             }
         }
@@ -121,9 +122,8 @@ namespace HashTable
 
             if (array[index] != null)
             {
-                array[index].Remove(item);
                 Count--;
-                return true;
+                return array[index].Remove(item);
             }
             else
             {
