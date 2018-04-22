@@ -68,7 +68,20 @@ namespace HashTable
         public bool Contains(T item)
         {
             int index = GetIndex(item);
-            return array[index].Contains(item) && array[index] != null;
+
+            if (item == null)
+            {
+                return false;
+            }
+
+            if (array[index] != null)
+            {
+                return array[index].Contains(item);
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public void CopyTo(T[] array, int arrayIndex)
@@ -83,13 +96,11 @@ namespace HashTable
                 throw new ArgumentException("The number of elements in the source this.array is greater than the available space from Index to the end of the destination array");
             }
 
-            T[] copyArray = new T[array.Length];
-            Array.Copy(array, copyArray, array.Length);
-
+            int index = arrayIndex;
             foreach (T element in this)
             {
-                copyArray[arrayIndex] = element;
-                arrayIndex++;
+                array[arrayIndex] = element;
+                index++;
             }
         }
 
@@ -119,6 +130,11 @@ namespace HashTable
         public bool Remove(T item)
         {
             int index = GetIndex(item);
+
+            if (item == null)
+            {
+                return false;
+            }
 
             if (array[index] != null)
             {

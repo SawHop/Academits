@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArrayList", "ArrayList\Arra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashTable", "HashTable\HashTable.csproj", "{27D1F2E5-9EBA-4DF9-83CB-E7DAC5114444}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lambda", "Lambda\Lambda.csproj", "{3187C8D8-5CFB-4C2E-B91E-18B0DCF2542E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{27D1F2E5-9EBA-4DF9-83CB-E7DAC5114444}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27D1F2E5-9EBA-4DF9-83CB-E7DAC5114444}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27D1F2E5-9EBA-4DF9-83CB-E7DAC5114444}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3187C8D8-5CFB-4C2E-B91E-18B0DCF2542E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3187C8D8-5CFB-4C2E-B91E-18B0DCF2542E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3187C8D8-5CFB-4C2E-B91E-18B0DCF2542E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3187C8D8-5CFB-4C2E-B91E-18B0DCF2542E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

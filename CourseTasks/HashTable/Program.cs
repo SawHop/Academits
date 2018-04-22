@@ -26,16 +26,17 @@ namespace HashTable
             Console.Write(" }");
             Console.WriteLine();
 
-            HashTable<double> hashTable1 = new HashTable<double>();
-            hashTable1.Add(2.3);
-            hashTable1.Add(23);
-            hashTable1.Add(7);
-            hashTable1.Add(6);
-            hashTable1.Add(2);
-            hashTable1.Add(1);
-            Console.WriteLine(hashTable1.Contains(6));
+            HashTable<string> hashTable1 = new HashTable<string>();
+            hashTable1.Add(null);
+            hashTable1.Add("b");
+            hashTable1.Add("c");
+            hashTable1.Add("de");
+            hashTable1.Add("e");
 
-            hashTable.Remove(72);
+            Console.WriteLine(hashTable1.Contains(null));
+            Console.WriteLine(hashTable1.Remove(null));
+
+            // hashTable.Remove(31);
 
             hashTable.Clear();
         }
