@@ -11,14 +11,38 @@ namespace List
     {
         static void Main(string[] args)
         {
-            Hashtable myHT = new Hashtable();
-            myHT.Add("one", "The");
-            myHT.Add("two", "quick");
-            myHT.Add("three", "brown");
-            myHT.Add("four", "fox");
-            myHT.Add("five", "jumped");
+            LinkedList<string> linkedList = new LinkedList<string>();
 
-            myHT.Clear();
+            linkedList.Add("Tom");
+            linkedList.Add("Alice");
+            linkedList.Add("Bob");
+            linkedList.Add("Sam");
+
+            foreach (var item in linkedList)
+            {
+                Console.WriteLine(item);
+            }
+
+            Console.WriteLine("Length of a simply connected linked list=" + linkedList.GetLengthList());
+            Console.WriteLine("First item of a simply connected linked list=" + linkedList.GetFirstItem());
+            Console.WriteLine("Getting item by index=" + linkedList.GetItemByIndex(3));
+            Console.WriteLine("Setting item by index=" + linkedList.SetItemByIndex(2, "George"));
+            Console.WriteLine("Remove item by index=" + linkedList.RemoveItemByIndex(2));
+            linkedList.AppendFirst("Timofey");
+
+            linkedList.TurnLinkedList();
+
+            foreach (var item in linkedList)
+            {
+                Console.WriteLine(item);
+            }
+
+            linkedList.AddItemByIndex(0, "Arni");
+            Console.WriteLine("Remove first element=" + linkedList.RemoveFirstElement());
+            Console.WriteLine("Remove element by item=" + linkedList.RemoveByElement("Alice"));
+            linkedList.TurnLinkedList();
+            linkedList.CopyLinkeadList();
+
         }
     }
 }

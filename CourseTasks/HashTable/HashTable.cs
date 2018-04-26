@@ -71,7 +71,7 @@ namespace HashTable
 
             if (item == null)
             {
-                return false;
+                return array[index].Contains(item);
             }
 
             if (array[index] != null)
@@ -99,7 +99,7 @@ namespace HashTable
             int index = arrayIndex;
             foreach (T element in this)
             {
-                array[arrayIndex] = element;
+                array[index] = element;
                 index++;
             }
         }
@@ -133,18 +133,17 @@ namespace HashTable
 
             if (item == null)
             {
-                return false;
+                Count--;
+                return array[index].Contains(item);
             }
 
-            if (array[index] != null)
+            if (array[index].Remove(item))
             {
                 Count--;
-                return array[index].Remove(item);
+                return true;
             }
-            else
-            {
-                return false;
-            }
+
+            return false;
         }
 
         IEnumerator IEnumerable.GetEnumerator()

@@ -27,7 +27,7 @@ namespace HashTable
             Console.WriteLine();
 
             HashTable<string> hashTable1 = new HashTable<string>();
-            hashTable1.Add(null);
+            hashTable1.Add("a");
             hashTable1.Add("b");
             hashTable1.Add("c");
             hashTable1.Add("de");
@@ -36,9 +36,8 @@ namespace HashTable
             Console.WriteLine(hashTable1.Contains(null));
             Console.WriteLine(hashTable1.Remove(null));
 
-            // hashTable.Remove(31);
 
-            hashTable.Clear();
+            hashTable1.Clear();
         }
     }
 }

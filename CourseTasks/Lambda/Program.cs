@@ -10,14 +10,20 @@ namespace Lambda
     {
         static void Main(string[] args)
         {
-            var ivan = new Person("Ivan", 10);
-            var sergey = new Person("Sergey", 15);
-            var petr = new Person("Petr", 20);
-            var timofey = new Person("Timofey", 20);
+            List<Person> person = new List<Person>()
+            {
+              new Person("Ivan", 10),
+            new Person("Sergey", 15),
+            new Person("Petr", 20),
+            new Person("Petr", 25),
+            new Person("Ivan", 25)
+        };
 
-            var person = new[] { ivan, sergey, petr, timofey };
-            person.Distinct(p => p.Name);
+            person.Distinct().Select(n => n.Name);
 
+
+
+            int x = 2;
 
 
 

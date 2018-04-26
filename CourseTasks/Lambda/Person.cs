@@ -17,26 +17,19 @@ namespace Lambda
             this.age = age;
         }
 
-        public string Name()
+        public string Name
         {
-            return name;
-        }
-
-        public int Age()
-        {
-            return age;
-        }
-
-        public static IEnumerable<TSource> DistinctBy<TSource, TKey>
-    (this IEnumerable<TSource> source, Func<TSource, TKey> keySelector)
-        {
-            HashSet<TKey> seenKeys = new HashSet<TKey>();
-            foreach (TSource element in source)
+            get
             {
-                if (seenKeys.Add(keySelector(element)))
-                {
-                    yield return element;
-                }
+                return name;
+            }
+        }
+
+        public int Age
+        {
+            get
+            {
+                return age;
             }
         }
     }
