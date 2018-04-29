@@ -23,14 +23,14 @@ namespace List
                 Console.WriteLine(item);
             }
 
-            Console.WriteLine("Length of a simply connected linked list=" + linkedList.GetLengthList());
+            Console.WriteLine("Length of a simply connected linked list=" + linkedList.Count());
             Console.WriteLine("First item of a simply connected linked list=" + linkedList.GetFirstItem());
-            Console.WriteLine("Getting item by index=" + linkedList.GetItemByIndex(3));
-            Console.WriteLine("Setting item by index=" + linkedList.SetItemByIndex(2, "George"));
-            Console.WriteLine("Remove item by index=" + linkedList.RemoveItemByIndex(2));
+            Console.WriteLine("Getting item by index=" + linkedList.GetItemByIndex(2));
+            Console.WriteLine("Setting item by index=" + linkedList.SetItemByIndex(1, null));
+            Console.WriteLine("Remove item by index=" + linkedList.RemoveItemByIndex(1));
             linkedList.AppendFirst("Timofey");
 
-            linkedList.TurnLinkedList();
+            linkedList.Turn();
 
             foreach (var item in linkedList)
             {
@@ -39,10 +39,9 @@ namespace List
 
             linkedList.AddItemByIndex(0, "Arni");
             Console.WriteLine("Remove first element=" + linkedList.RemoveFirstElement());
-            Console.WriteLine("Remove element by item=" + linkedList.RemoveByElement("Alice"));
-            linkedList.TurnLinkedList();
-            linkedList.CopyLinkeadList();
-
+            Console.WriteLine("Remove element by item=" + linkedList.RemoveByElement("Timofey"));
+            linkedList.Turn();
+            linkedList.Copy();
         }
     }
 }

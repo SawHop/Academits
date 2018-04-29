@@ -6,18 +6,20 @@ using System.Threading.Tasks;
 
 namespace List
 {
-    class Node<T>
+    internal class Node<T>
     {
-        public Node(T data)
+        internal Node(T data)
         {
             Data = data;
         }
-        public T Data
+
+        internal T Data
         {
             get;
             set;
         }
-        public Node<T> Next
+
+        internal Node<T> Next
         {
             get;
             set;
@@ -25,8 +27,11 @@ namespace List
 
         public override string ToString()
         {
+            if (Data == null)
+            {
+                return "null";
+            }
             return Data.ToString();
         }
-
     }
 }
