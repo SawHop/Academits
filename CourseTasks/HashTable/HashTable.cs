@@ -69,9 +69,9 @@ namespace HashTable
         {
             int index = GetIndex(item);
 
-            if (item == null)
+            if (array[index] == null)
             {
-                return array[index].Contains(item);
+                return false;
             }
 
             if (array[index] != null)
@@ -131,10 +131,9 @@ namespace HashTable
         {
             int index = GetIndex(item);
 
-            if (item == null)
+            if (array[index] == null)
             {
-                Count--;
-                return array[index].Contains(item);
+                return false;
             }
 
             if (array[index].Remove(item))

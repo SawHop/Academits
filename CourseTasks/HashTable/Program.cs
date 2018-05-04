@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,7 +28,7 @@ namespace HashTable
             Console.WriteLine();
 
             HashTable<string> hashTable1 = new HashTable<string>();
-            hashTable1.Add("a");
+            hashTable1.Add("s");
             hashTable1.Add("b");
             hashTable1.Add("c");
             hashTable1.Add("de");
@@ -38,6 +39,14 @@ namespace HashTable
 
 
             hashTable1.Clear();
+
+            Hashtable qwe = new Hashtable();
+            qwe.Add(0, "A");
+            qwe.Add(1, "B");
+            qwe.Add(2, null);
+
+            Console.WriteLine(qwe.Contains(2));
+            qwe.Remove(2);
         }
     }
 }

@@ -20,14 +20,6 @@ namespace Lambda
         };
 
             person.Distinct().Select(n => n.Name);
-
-
-
-            int x = 2;
-
-
-
-
         }
     }
 }

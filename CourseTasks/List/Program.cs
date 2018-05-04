@@ -25,11 +25,10 @@ namespace List
 
             Console.WriteLine("Length of a simply connected linked list=" + linkedList.Count());
             Console.WriteLine("First item of a simply connected linked list=" + linkedList.GetFirstItem());
-            Console.WriteLine("Getting item by index=" + linkedList.GetItemByIndex(2));
-            Console.WriteLine("Setting item by index=" + linkedList.SetItemByIndex(1, null));
+            Console.WriteLine("Getting item by index=" + linkedList.GetItemByIndexPublic(2));
+            Console.WriteLine("Setting item by index=" + linkedList.SetItemByIndex(0, null));
             Console.WriteLine("Remove item by index=" + linkedList.RemoveItemByIndex(1));
-            linkedList.AppendFirst("Timofey");
-
+            linkedList.AddFirst("Timofey");
             linkedList.Turn();
 
             foreach (var item in linkedList)
@@ -37,10 +36,9 @@ namespace List
                 Console.WriteLine(item);
             }
 
-            linkedList.AddItemByIndex(0, "Arni");
+            linkedList.AddItemByIndex(4, "Arni");
             Console.WriteLine("Remove first element=" + linkedList.RemoveFirstElement());
-            Console.WriteLine("Remove element by item=" + linkedList.RemoveByElement("Timofey"));
-            linkedList.Turn();
+            Console.WriteLine("Remove element by item=" + linkedList.RemoveByElement(null));
             linkedList.Copy();
         }
     }

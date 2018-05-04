@@ -13,6 +13,15 @@ namespace List
         private Node<T> head;
         private int modChanges;
 
+        public LinkedList(int count)
+        {
+            Count = count;
+        }
+
+        public LinkedList()
+        {
+        }
+
         //Получение длины списка
         public int Count
         {
@@ -31,9 +40,9 @@ namespace List
         }
 
         //Получение элемента по указанному индексу
-        public Node<T> GetItemByIndex(int indexInLinkeadList)
+        private Node<T> GetItemByIndex(int index)
         {
-            if (indexInLinkeadList < 0 || indexInLinkeadList >= Count)
+            if (index < 0 || index >= Count)
             {
                 throw new IndexOutOfRangeException("Index out of range");
             }
@@ -42,7 +51,7 @@ namespace List
 
             for (int i = 0; i < Count; i++)
             {
-                if (i == indexInLinkeadList)
+                if (i == index)
                 {
                     break;
                 }
@@ -51,31 +60,58 @@ namespace List
             return node;
         }
 
-        //Изменение элемента по указанному индексу
-        public T SetItemByIndex(int indexInLinkeadList, T item)
+        public T GetItemByIndexPublic(int index)
         {
-            if (indexInLinkeadList < 0 || indexInLinkeadList >= Count)
+            if (index < 0 || index >= Count)
             {
                 throw new IndexOutOfRangeException("Index out of range");
             }
 
-            Node<T> node = GetItemByIndex(indexInLinkeadList);
-            var temp = node;
+            Node<T> node = head;
+
+            for (int i = 0; i < Count; i++)
+            {
+                if (i == index)
+                {
+                    break;
+                }
+                node = node.Next;
+            }
+            return node.Data;
+        }
+
+        //Изменение элемента по указанному индексу
+        public T SetItemByIndex(int index, T item)
+        {
+            if (index < 0 || index >= Count)
+            {
+                throw new IndexOutOfRangeException("Index out of range");
+            }
+
+            Node<T> node = GetItemByIndex(index);
+            var temp = node.Data;
             node.Data = item;
 
             modChanges++;
-            return temp.Data;
+            return temp;
         }
 
         //Удаление элемента по индексу
-        public T RemoveItemByIndex(int indexInLinkeadList)
+        public T RemoveItemByIndex(int index)
         {
-            if (indexInLinkeadList < 0 || indexInLinkeadList >= Count)
+            if (index < 0 || index >= Count)
             {
                 throw new IndexOutOfRangeException("Index out of range");
             }
 
-            Node<T> previous = GetItemByIndex(indexInLinkeadList - 1);
+            if (index == 0)
+            {
+                head = head.Next;
+                Count--;
+                return head.Data;
+            }
+
+            Node<T> previous = GetItemByIndex(index - 1);
             Node<T> current = previous.Next;
 
             var temp = current;
@@ -88,7 +124,7 @@ namespace List
         }
 
         // добвление в начало
-        public void AppendFirst(T data)
+        public void AddFirst(T data)
         {
             Node<T> node = new Node<T>(data);
             node.Next = head;
@@ -99,17 +135,15 @@ namespace List
         }
 
         //Вставка элемента по индексу
-        public void AddItemByIndex(int indexInLinkeadList, T item)
+        public void AddItemByIndex(int index, T item)
         {
-            if (indexInLinkeadList < 0 || indexInLinkeadList >= Count)
+            if (index < 0 || index > Count)
             {
                 throw new IndexOutOfRangeException("Index out of range");
             }
-
-            Node<T> node = GetItemByIndex(indexInLinkeadList);
             Node<T> nodeElement = new Node<T>(item);
 
-            if (indexInLinkeadList == 0)
+            if (index == 0)
             {
                 nodeElement.Next = head;
                 head = nodeElement;
@@ -119,6 +153,7 @@ namespace List
             }
             else
             {
+                Node<T> node = GetItemByIndex(index - 1);
                 nodeElement.Next = node.Next;
                 node.Next = nodeElement;
 
@@ -139,16 +174,9 @@ namespace List
             }
             else
             {
-                for (int i = 0; i < Count; i++)
-                {
-                    if (i == Count - 1)
-                    {
-                        current.Next = node;
-                    }
-                    current = current.Next;
-                }
+                Node<T> previous = GetItemByIndex(Count - 1);
+                previous.Next = node;
             }
-
             modChanges++;
             Count++;
         }
@@ -156,16 +184,17 @@ namespace List
         //Удаление первого элемента
         public T RemoveFirstElement()
         {
-            while (head != null)
+            if (head == null)
             {
-                var temp = head;
-                head = head.Next;
-
-                modChanges++;
-                Count--;
-                return temp.Data;
+                throw new ArgumentNullException("List is empty");
             }
-            return head.Data;
+            var temp = head;
+            head = head.Next;
+
+            modChanges++;
+            Count--;
+            return temp.Data;
+
         }
 
         // удаление элемента
@@ -173,6 +202,34 @@ namespace List
         {
             Node<T> current = head;
             Node<T> previous = null;
+
+            if (current.Data.Equals(data))
+            {
+                modChanges++;
+                Count--;
+                return true;
+            }
+
+            if (data == null)
+            {
+                while (current != null)
+                {
+                    if (current.Data == null)
+                    {
+                        if (previous != null)
+                        {
+                            previous.Next = current.Next;
+                        }
+
+                        modChanges++;
+                        Count--;
+                        return true;
+                    }
+                    previous = current;
+                    current = current.Next;
+                }
+                return false;
+            }
 
             while (current != null)
             {
@@ -207,17 +264,31 @@ namespace List
             }
         }
 
+        //Изменение элемента по указанному индексу
+        private Node<T> SetItemByIndexForCopy(int index, Node<T> item)
+        {
+            if (index < 0 || index >= Count)
+            {
+                throw new IndexOutOfRangeException("Index out of range");
+            }
+
+            if (head == null)
+            {
+                head = item;
+            }
+            Node<T> node = head;
+
+            modChanges++;
+            return node;
+        }
+
         //Копирования листа
         public void Copy()
         {
-            var linkedList = new LinkedList<T>();
+            var linkedList = new LinkedList<T>(Count);
             Node<T> node = head;
 
-            for (int i = 0; i < Count; i++)
-            {
-                linkedList.Add(node.Data);
-                node = node.Next;
-            }
+            linkedList.SetItemByIndexForCopy(0, node);
         }
 
         // реализация интерфейса IEnumerable
