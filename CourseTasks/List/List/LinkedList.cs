@@ -13,15 +13,6 @@ namespace List
         private Node<T> head;
         private int modChanges;
 
-        public LinkedList(int count)
-        {
-            Count = count;
-        }
-
-        public LinkedList()
-        {
-        }
-
         //Получение длины списка
         public int Count
         {
@@ -47,7 +38,7 @@ namespace List
                 throw new IndexOutOfRangeException("Index out of range");
             }
 
-            Node<T> node = head;
+            var node = head;
 
             for (int i = 0; i < Count; i++)
             {
@@ -60,23 +51,14 @@ namespace List
             return node;
         }
 
-        public T GetItemByIndexPublic(int index)
+        public T GetElementByIndex(int index)
         {
             if (index < 0 || index >= Count)
             {
                 throw new IndexOutOfRangeException("Index out of range");
             }
 
-            Node<T> node = head;
-
-            for (int i = 0; i < Count; i++)
-            {
-                if (i == index)
-                {
-                    break;
-                }
-                node = node.Next;
-            }
+            var node = GetItemByIndex(index);
             return node.Data;
         }
 
@@ -88,7 +70,7 @@ namespace List
                 throw new IndexOutOfRangeException("Index out of range");
             }
 
-            Node<T> node = GetItemByIndex(index);
+            var node = GetItemByIndex(index);
             var temp = node.Data;
             node.Data = item;
 
@@ -107,26 +89,27 @@ namespace List
             if (index == 0)
             {
                 head = head.Next;
+                modChanges++;
+
                 Count--;
                 return head.Data;
             }
 
-            Node<T> previous = GetItemByIndex(index - 1);
-            Node<T> current = previous.Next;
+            var previous = GetItemByIndex(index - 1);
+            var current = previous.Next;
 
-            var temp = current;
             previous.Next = current.Next;
 
             modChanges++;
             Count--;
 
-            return temp.Data;
+            return current.Data;
         }
 
         // добвление в начало
         public void AddFirst(T data)
         {
-            Node<T> node = new Node<T>(data);
+            var node = new Node<T>(data);
             node.Next = head;
             head = node;
 
@@ -141,7 +124,7 @@ namespace List
             {
                 throw new IndexOutOfRangeException("Index out of range");
             }
-            Node<T> nodeElement = new Node<T>(item);
+            var nodeElement = new Node<T>(item);
 
             if (index == 0)
             {
@@ -153,7 +136,7 @@ namespace List
             }
             else
             {
-                Node<T> node = GetItemByIndex(index - 1);
+                var node = GetItemByIndex(index - 1);
                 nodeElement.Next = node.Next;
                 node.Next = nodeElement;
 
@@ -165,20 +148,7 @@ namespace List
         // добавление элемента
         public void Add(T data)
         {
-            Node<T> node = new Node<T>(data);
-            Node<T> current = head;
-
-            if (head == null)
-            {
-                head = node;
-            }
-            else
-            {
-                Node<T> previous = GetItemByIndex(Count - 1);
-                previous.Next = node;
-            }
-            modChanges++;
-            Count++;
+            AddItemByIndex(Count, data);
         }
 
         //Удаление первого элемента
@@ -200,47 +170,24 @@ namespace List
         // удаление элемента
         public bool RemoveByElement(T data)
         {
-            Node<T> current = head;
+            var current = head;
             Node<T> previous = null;
 
-            if (current.Data.Equals(data))
+            if (current.Data == null || current.Data.Equals(data))
             {
+                head = head.Next;
                 modChanges++;
                 Count--;
                 return true;
             }
 
-            if (data == null)
-            {
-                while (current != null)
-                {
-                    if (current.Data == null)
-                    {
-                        if (previous != null)
-                        {
-                            previous.Next = current.Next;
-                        }
-
-                        modChanges++;
-                        Count--;
-                        return true;
-                    }
-                    previous = current;
-                    current = current.Next;
-                }
-                return false;
-            }
-
             while (current != null)
             {
-                if (current.Data.Equals(data))
+                if (current.Data == null || current.Data.Equals(data))
                 {
-                    if (previous != null)
-                    {
-                        previous.Next = current.Next;
-                    }
-
+                    previous.Next = current.Next;
                     modChanges++;
+
                     Count--;
                     return true;
                 }
@@ -262,33 +209,27 @@ namespace List
                 temp.Next = head;
                 head = temp;
             }
-        }
-
-        //Изменение элемента по указанному индексу
-        private Node<T> SetItemByIndexForCopy(int index, Node<T> item)
-        {
-            if (index < 0 || index >= Count)
-            {
-                throw new IndexOutOfRangeException("Index out of range");
-            }
-
-            if (head == null)
-            {
-                head = item;
-            }
-            Node<T> node = head;
-
             modChanges++;
-            return node;
         }
 
         //Копирования листа
         public void Copy()
         {
-            var linkedList = new LinkedList<T>(Count);
+            var linkedList = new LinkedList<T>();
             Node<T> node = head;
 
-            linkedList.SetItemByIndexForCopy(0, node);
+            for (int i = 0; i < Count; i++)
+            {
+                if (linkedList.head == null)
+                {
+                    linkedList.head = node;
+                }
+                else
+                {
+                    linkedList.head.Next = node;
+                }
+                node = node.Next;
+            }
         }
 
         // реализация интерфейса IEnumerable
@@ -301,7 +242,7 @@ namespace List
         {
             int modCount = modChanges;
 
-            Node<T> current = head;
+            var current = head;
             while (current != null)
             {
                 if (modChanges != modCount)

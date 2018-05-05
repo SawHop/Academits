@@ -73,14 +73,9 @@ namespace HashTable
             {
                 return false;
             }
-
-            if (array[index] != null)
-            {
-                return array[index].Contains(item);
-            }
             else
             {
-                return false;
+                return array[index].Contains(item);
             }
         }
 
@@ -133,11 +128,13 @@ namespace HashTable
 
             if (array[index] == null)
             {
+                modChanges++;
                 return false;
             }
 
             if (array[index].Remove(item))
             {
+                modChanges++;
                 Count--;
                 return true;
             }

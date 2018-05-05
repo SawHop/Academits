@@ -25,7 +25,7 @@ namespace List
 
             Console.WriteLine("Length of a simply connected linked list=" + linkedList.Count());
             Console.WriteLine("First item of a simply connected linked list=" + linkedList.GetFirstItem());
-            Console.WriteLine("Getting item by index=" + linkedList.GetItemByIndexPublic(2));
+            Console.WriteLine("Getting item by index=" + linkedList.GetElementByIndex(2));
             Console.WriteLine("Setting item by index=" + linkedList.SetItemByIndex(0, null));
             Console.WriteLine("Remove item by index=" + linkedList.RemoveItemByIndex(1));
             linkedList.AddFirst("Timofey");
