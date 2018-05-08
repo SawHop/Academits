@@ -128,7 +128,6 @@ namespace HashTable
 
             if (array[index] == null)
             {
-                modChanges++;
                 return false;
             }
 

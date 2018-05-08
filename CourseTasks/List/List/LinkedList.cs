@@ -13,6 +13,16 @@ namespace List
         private Node<T> head;
         private int modChanges;
 
+        public LinkedList(Node<T> head, int count)
+        {
+            this.head = head;
+            Count = count;
+        }
+
+        public LinkedList()
+        {
+        }
+
         //Получение длины списка
         public int Count
         {
@@ -53,11 +63,6 @@ namespace List
 
         public T GetElementByIndex(int index)
         {
-            if (index < 0 || index >= Count)
-            {
-                throw new IndexOutOfRangeException("Index out of range");
-            }
-
             var node = GetItemByIndex(index);
             return node.Data;
         }
@@ -65,11 +70,6 @@ namespace List
         //Изменение элемента по указанному индексу
         public T SetItemByIndex(int index, T item)
         {
-            if (index < 0 || index >= Count)
-            {
-                throw new IndexOutOfRangeException("Index out of range");
-            }
-
             var node = GetItemByIndex(index);
             var temp = node.Data;
             node.Data = item;
@@ -173,26 +173,44 @@ namespace List
             var current = head;
             Node<T> previous = null;
 
-            if (current.Data == null || current.Data.Equals(data))
+            var check = true;
+            if (current.Data == null && data != null)
             {
-                head = head.Next;
-                modChanges++;
-                Count--;
-                return true;
+                check = false;
+            }
+
+            if (check == true)
+            {
+                if (current.Data == null || current.Data.Equals(data))
+                {
+                    head = head.Next;
+                    modChanges++;
+                    Count--;
+                    return true;
+                }
             }
 
             while (current != null)
             {
-                if (current.Data == null || current.Data.Equals(data))
+                if (current.Data == null && data != null)
                 {
-                    previous.Next = current.Next;
-                    modChanges++;
-
-                    Count--;
-                    return true;
+                    previous = current;
+                    current = current.Next;
+                    continue;
                 }
-                previous = current;
-                current = current.Next;
+                else
+                {
+                    if (current.Data == null || current.Data.Equals(data))
+                    {
+                        previous.Next = current.Next;
+                        modChanges++;
+
+                        Count--;
+                        return true;
+                    }
+                    previous = current;
+                    current = current.Next;
+                }
             }
             return false;
         }
@@ -212,23 +230,28 @@ namespace List
             modChanges++;
         }
 
+        public Node<T> SetItemByIndexForCopy(int index, Node<T> item)
+        {
+            var node = GetItemByIndex(index - 1);
+            node.Next = new Node<T>(item.Data);
+            return node;
+        }
+
         //Копирования листа
         public void Copy()
         {
-            var linkedList = new LinkedList<T>();
-            Node<T> node = head;
-
-            for (int i = 0; i < Count; i++)
+            if (Count == 0)
             {
-                if (linkedList.head == null)
-                {
-                    linkedList.head = node;
-                }
-                else
-                {
-                    linkedList.head.Next = node;
-                }
+                throw new ArgumentNullException("List is empty");
+            }
+
+            var linkedList = new LinkedList<T>(new Node<T>(head.Data), Count);
+            var node = head;
+
+            for (int i = 1; i < Count; i++)
+            {
                 node = node.Next;
+                linkedList.SetItemByIndexForCopy(i, node);
             }
         }
 

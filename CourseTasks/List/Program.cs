@@ -38,7 +38,7 @@ namespace List
 
             linkedList.AddItemByIndex(4, "Arni");
             Console.WriteLine("Remove first element=" + linkedList.RemoveFirstElement());
-            Console.WriteLine("Remove element by item=" + linkedList.RemoveByElement(null));
+            Console.WriteLine("Remove element by item=" + linkedList.RemoveByElement("Arni"));
             linkedList.Copy();
         }
     }
