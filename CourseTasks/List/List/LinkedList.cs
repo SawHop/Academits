@@ -173,44 +173,26 @@ namespace List
             var current = head;
             Node<T> previous = null;
 
-            var check = true;
-            if (current.Data == null && data != null)
+            if (Equals(data, current.Data))
             {
-                check = false;
-            }
-
-            if (check == true)
-            {
-                if (current.Data == null || current.Data.Equals(data))
-                {
-                    head = head.Next;
-                    modChanges++;
-                    Count--;
-                    return true;
-                }
+                head = head.Next;
+                modChanges++;
+                Count--;
+                return true;
             }
 
             while (current != null)
             {
-                if (current.Data == null && data != null)
+                if (Equals(data, current.Data))
                 {
-                    previous = current;
-                    current = current.Next;
-                    continue;
-                }
-                else
-                {
-                    if (current.Data == null || current.Data.Equals(data))
-                    {
-                        previous.Next = current.Next;
-                        modChanges++;
+                    previous.Next = current.Next;
+                    modChanges++;
 
-                        Count--;
-                        return true;
-                    }
-                    previous = current;
-                    current = current.Next;
+                    Count--;
+                    return true;
                 }
+                previous = current;
+                current = current.Next;
             }
             return false;
         }
@@ -242,16 +224,19 @@ namespace List
         {
             if (Count == 0)
             {
-                throw new ArgumentNullException("List is empty");
+                var linkedList = new LinkedList<T>();
             }
-
-            var linkedList = new LinkedList<T>(new Node<T>(head.Data), Count);
-            var node = head;
-
-            for (int i = 1; i < Count; i++)
+            else
             {
-                node = node.Next;
-                linkedList.SetItemByIndexForCopy(i, node);
+                var linkedList = new LinkedList<T>(new Node<T>(head.Data), Count);
+                var node = head;
+                var previe = head;
+
+                for (int i = 1; i < Count; i++)
+                {
+                    node = node.Next;
+                    previe = node;
+                }
             }
         }
 
