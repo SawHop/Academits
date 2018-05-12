@@ -8,29 +8,13 @@ namespace Lambda
 {
     class Person
     {
-        private string name;
-        private int age;
+        public string Name { get; set; }
+        public int Age { get; set; }
 
         public Person(string name, int age)
         {
-            this.name = name;
-            this.age = age;
-        }
-
-        public string Name
-        {
-            get
-            {
-                return name;
-            }
-        }
-
-        public int Age
-        {
-            get
-            {
-                return age;
-            }
+            Name = name;
+            Age = age;
         }
     }
 }

@@ -13,12 +13,6 @@ namespace List
         private Node<T> head;
         private int modChanges;
 
-        public LinkedList(Node<T> head, int count)
-        {
-            this.head = head;
-            Count = count;
-        }
-
         public LinkedList()
         {
         }
@@ -214,9 +208,9 @@ namespace List
 
         public Node<T> SetItemByIndexForCopy(int index, Node<T> item)
         {
-            var node = GetItemByIndex(index - 1);
-            node.Next = new Node<T>(item.Data);
-            return node;
+            var nodeElement = GetItemByIndex(index - 1);
+            nodeElement.Next = new Node<T>(item.Data);
+            return nodeElement;
         }
 
         //Копирования листа
@@ -228,14 +222,17 @@ namespace List
             }
             else
             {
-                var linkedList = new LinkedList<T>(new Node<T>(head.Data), Count);
-                var node = head;
-                var previe = head;
+                var linkedList = new LinkedList<T>();
+                linkedList.head = new Node<T>(head.Data);
+                var node1 = linkedList.head;
+                var node2 = head;
 
                 for (int i = 1; i < Count; i++)
                 {
-                    node = node.Next;
-                    previe = node;
+                    node1.Next = new Node<T>(node2.Next.Data); 
+
+                    //node = node.Next;
+                    //linkedList.SetItemByIndexForCopy(i, node);
                 }
             }
         }
