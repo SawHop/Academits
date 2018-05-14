@@ -29,7 +29,7 @@ namespace List
             Console.WriteLine("Setting item by index=" + linkedList.SetItemByIndex(0, null));
             Console.WriteLine("Remove item by index=" + linkedList.RemoveItemByIndex(1));
             linkedList.AddFirst("Timofey");
-            //linkedList.Turn();
+            linkedList.Turn();
 
             foreach (var item in linkedList)
             {
@@ -38,7 +38,7 @@ namespace List
 
             linkedList.AddItemByIndex(4, "Arni");
             Console.WriteLine("Remove first element=" + linkedList.RemoveFirstElement());
-            //Console.WriteLine("Remove element by item=" + linkedList.RemoveByElement("Arni"));
+            Console.WriteLine("Remove element by item=" + linkedList.RemoveByElement("Arni"));
             linkedList.Copy();
         }
     }

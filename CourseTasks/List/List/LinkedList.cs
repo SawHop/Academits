@@ -206,34 +206,31 @@ namespace List
             modChanges++;
         }
 
-        public Node<T> SetItemByIndexForCopy(int index, Node<T> item)
-        {
-            var nodeElement = GetItemByIndex(index - 1);
-            nodeElement.Next = new Node<T>(item.Data);
-            return nodeElement;
-        }
-
         //Копирования листа
-        public void Copy()
+        public LinkedList<T> Copy()
         {
             if (Count == 0)
             {
                 var linkedList = new LinkedList<T>();
+                return linkedList;
             }
             else
             {
                 var linkedList = new LinkedList<T>();
                 linkedList.head = new Node<T>(head.Data);
-                var node1 = linkedList.head;
-                var node2 = head;
+
+                var node = head;
+                linkedList.Count++;
 
                 for (int i = 1; i < Count; i++)
                 {
-                    node1.Next = new Node<T>(node2.Next.Data); 
+                    node = node.Next;
+                    var nodeElement = linkedList.GetItemByIndex(i - 1);
 
-                    //node = node.Next;
-                    //linkedList.SetItemByIndexForCopy(i, node);
+                    nodeElement.Next = new Node<T>(node.Data);
+                    linkedList.Count++;
                 }
+                return linkedList;
             }
         }
 
